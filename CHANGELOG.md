@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Modify the API usage so that it returns first class Objects instead of just a dictionary
 
+## [0.1.13]
+### Changed
+- `setup.py` now imports the requirements from requirement.txt
+### Added
+- added a manifest for setup.py distribution packaging
+
+## [0.1.12]
+### Fixed
+- Fixed the version number for requests package in [setup.py](setup.py)
+
 ## [0.1.11]
 ### Added
 - Added this changelog
