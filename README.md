@@ -31,5 +31,6 @@ history = api.match_history(player_name=player, platform=platform, action=action
 player = api.get_player_origin(player_name=player, platform=platform)
 
 ```
-
-See https://apexlegendsapi.com for complete documentation.
+## Notes
+- See https://apexlegendsapi.com for complete documentation.
+- See [CHANGELOG.md](CHANGELOG.md) for history of changes

@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setup(
     name='apex-legends-api',
-    version='0.1.10',
+    version='0.1.11',
     packages=['apex_legends_api'],
     python_requires='>=3.6.*',
     url='https://github.com/johnsturgeon/apex-legends-api',
