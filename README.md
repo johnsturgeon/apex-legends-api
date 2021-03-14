@@ -6,7 +6,7 @@ You can install it from source, or pip (recommended)
 # Requirements
 `python >= 3.6`
 ### Source installation
-`python setupl.py install`
+`python ./setup.py install`
 ### Pip installation
 `pip install apex-legends-api`
 
