@@ -5,11 +5,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- Modify the API usage so that it returns first class Objects instead of just a dictionary
+- Modify the API usage so that it returns first class Objects instead of just a list
+
+## [0.2.0]
+### Fixed
+- Fixed return types from all api calls to be consistent (list)
+
+### Changed
+- Changed return types from dict to list
+- Changed the `get_player_origin` api to no longer pass the (unused) platform parameter
+- Added `show_all_hits` to the `get_player_origin` api to allow for searching the origin for users
 
 ## [0.1.13]
 ### Changed
 - `setup.py` now imports the requirements from requirement.txt
+
 ### Added
 - added a manifest for setup.py distribution packaging
 

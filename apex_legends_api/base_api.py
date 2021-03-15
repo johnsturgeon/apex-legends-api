@@ -40,7 +40,7 @@ class ApexLegendsAPI:
         self.session = requests.Session()
         self.session.headers.update({'Authorization': api_key})
 
-    def make_request(self, endpoint: str, base_url: str = None) -> dict:
+    def make_request(self, endpoint: str, base_url: str = None) -> list:
         """ Send the request to the apex legends api """
         if not base_url:
             base_url = self.base_url
@@ -51,9 +51,13 @@ class ApexLegendsAPI:
             response_text = json.loads(response.text)
             with open('response.json', 'w') as f_name:
                 json.dump(response_text, f_name, indent=4)
+
+        # sometimes we get a pure dictionary back, let's wrap it in a list for consistency
+        if isinstance(response_text, dict):
+            response_text = [response_text]
         return response_text
 
-    def basic_player_stats(self, player_name: str, platform: Platform) -> dict:
+    def basic_player_stats(self, player_name: str, platform: Platform) -> list:
         """
         Query the server for the given player / platform and returns a dictionary of their
         stats.
@@ -61,12 +65,12 @@ class ApexLegendsAPI:
         TODO: Make player_name a list since the API can accept multiple player names
         :param player_name: Player Name to search for
         :param platform: (see Platform enum for values)
-        :return: Dictionary of player stats created from response json
+        :return: List of player stats created from response json
         """
         endpoint = f"&platform={platform.value}&player={player_name}"
         return self.make_request(endpoint)
 
-    def match_history(self, player_name: str, platform: Platform, action: Action) -> dict:
+    def match_history(self, player_name: str, platform: Platform, action: Action) -> list:
         """
         Query the server for the given player / platform and return a dictionary of their
         match history
@@ -79,7 +83,7 @@ class ApexLegendsAPI:
         :param player_name: Player Name for match history
         :param platform: see Platform enum for values
         :param action: see Action enum for values
-        :return: Dictionary of history created from response json
+        :return: List of history created from response json
         """
         endpoint = f"&platform={platform.value}" \
                    f"&player={player_name}" \
@@ -87,16 +91,18 @@ class ApexLegendsAPI:
                    f"&action={action.value}"
         return self.make_request(endpoint)
 
-    def get_player_origin(self, player_name: str, platform: Platform) -> dict:
+    def get_player_origin(self, player_name: str, show_all_hits: bool = False) -> list:
         """
         Query the server for the origin user
         Returns Origin UID, real username, PID and avatar for a given username
         :param player_name: Player Name for match history
-        :param platform: see Platform enum for values
-        :return: Dictionary of data created from response json
+        :param show_all_hits: True to 'search' for player (show multiple hits), default False
+        :return: list of results
         """
+        show_hits_string = ""
+        if show_all_hits:
+            show_hits_string = "&showAllHits"
         base_url = "https://api.mozambiquehe.re/origin?"
         endpoint = f"player={player_name}" \
-                   f"&platform={platform.value}" \
-                   f"&showAllHits"
+                   f"{show_hits_string}"
         return self.make_request(base_url=base_url, endpoint=endpoint)
