@@ -28,7 +28,7 @@ action = Action.GET
 
 basic = api.basic_player_stats(player_name=player, platform=platform)
 history = api.match_history(player_name=player, platform=platform, action=action)
-player = api.get_player_origin(player_name=player, platform=platform)
+player = api.get_player_origin(player_name=player, show_all_hits=True)
 
 ```
 ## Notes
