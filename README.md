@@ -16,9 +16,8 @@ You can install it from source, or pip (recommended)
 * All method calls return a dictionary representing the JSON in the response.
 
 ```python
-from apex_legends_api.base_api import ApexLegendsAPI
-from apex_legends_api.base_api import Platform
-from apex_legends_api.base_api import Action
+from apex_legends_api import ApexLegendsAPI
+from apex_legends_api import Platform, Action
 
 api = ApexLegendsAPI(api_key='<api_key>')
 

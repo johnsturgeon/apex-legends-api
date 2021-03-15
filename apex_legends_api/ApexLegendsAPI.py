@@ -1,31 +1,14 @@
 """
-Apex Legends API Module
+Apex Legends API
 
-This module contains the class ApexLegendsAPI which wraps the api at:
+The ApexLegendsAPI wraps the api at:
 https://apexlegendsapi.com
-
-Classes:
-    ApexLegendsAPI()
     Init with your API Key (get at https://apexlegendsapi.com)
 """
+
 import json
-from enum import Enum
 import requests
-
-
-class Platform(Enum):
-    """ Three platforms available """
-    XBOX = "X1"
-    PSN = "PS4"
-    PC = "PC"
-
-
-class Action(Enum):
-    """ Three actions available """
-    INFO = "info"  # return the players you're currently tracking
-    GET = "get"  # return ALL tracked events for the player
-    ADD = "add"  # adds the player for history collection
-    DELETE = "delete"  # removes the given user from the tracked users list
+from base import Platform, Action
 
 
 class ApexLegendsAPI:
@@ -49,8 +32,6 @@ class ApexLegendsAPI:
         response_text = {}
         if response.status_code == 200:
             response_text = json.loads(response.text)
-            with open('response.json', 'w') as f_name:
-                json.dump(response_text, f_name, indent=4)
 
         # sometimes we get a pure dictionary back, let's wrap it in a list for consistency
         if isinstance(response_text, dict):

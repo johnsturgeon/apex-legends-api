@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Modify the API usage so that it returns first class Objects instead of just a list
 
+## [0.2.1]
+### Changed
+- the module is now exporting all the classes through the `__init__.py` which will make importing
+simpler
+- Moved `ApexLegendsAPI` class to its own file
+
+## Fixed
+- Removed debug code that dumped the response json to a file
+
 ## [0.2.0]
 ### Fixed
 - Fixed return types from all api calls to be consistent (list)
