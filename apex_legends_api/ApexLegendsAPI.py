@@ -8,7 +8,7 @@ https://apexlegendsapi.com
 
 import json
 import requests
-from base import Platform, Action
+from base import ALPlatform, ALAction
 
 
 class ApexLegendsAPI:
@@ -38,7 +38,7 @@ class ApexLegendsAPI:
             response_text = [response_text]
         return response_text
 
-    def basic_player_stats(self, player_name: str, platform: Platform) -> list:
+    def basic_player_stats(self, player_name: str, platform: ALPlatform) -> list:
         """
         Query the server for the given player / platform and returns a dictionary of their
         stats.
@@ -51,7 +51,7 @@ class ApexLegendsAPI:
         endpoint = f"&platform={platform.value}&player={player_name}"
         return self.make_request(endpoint)
 
-    def match_history(self, player_name: str, platform: Platform, action: Action) -> list:
+    def match_history(self, player_name: str, platform: ALPlatform, action: ALAction) -> list:
         """
         Query the server for the given player / platform and return a dictionary of their
         match history
