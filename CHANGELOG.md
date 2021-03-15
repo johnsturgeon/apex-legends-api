@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Modify the API usage so that it returns first class Objects instead of just a list
 
+## [0.3.0]
+### Changed
+- Class renames (which will change the API).  Now all classes are prefixed with `AL` (Apex Legends)
+
 ## [0.2.1]
 ### Changed
 - the module is now exporting all the classes through the `__init__.py` which will make importing
