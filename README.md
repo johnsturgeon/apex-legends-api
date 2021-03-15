@@ -17,13 +17,13 @@ You can install it from source, or pip (recommended)
 
 ```python
 from apex_legends_api import ApexLegendsAPI
-from apex_legends_api import Platform, Action
+from apex_legends_api import ALPlatform, ALAction
 
 api = ApexLegendsAPI(api_key='<api_key>')
 
 player = '<PlayerName>'
-platform = Platform.PC
-action = Action.GET
+platform = ALPlatform.PC
+action = ALAction.GET
 
 basic = api.basic_player_stats(player_name=player, platform=platform)
 history = api.match_history(player_name=player, platform=platform, action=action)

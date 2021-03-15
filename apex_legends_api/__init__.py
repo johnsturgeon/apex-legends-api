@@ -1,8 +1,8 @@
 from .ApexLegendsAPI import ApexLegendsAPI
-from .base import Platform, Action
+from .base import ALPlatform, ALAction
 
 __all__ = [
     'ApexLegendsAPI',
-    'Platform',
-    'Action'
+    'ALPlatform',
+    'ALAction'
 ]
