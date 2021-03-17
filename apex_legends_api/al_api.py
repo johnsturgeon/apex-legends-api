@@ -5,10 +5,10 @@ The ApexLegendsAPI wraps the api at:
 https://apexlegendsapi.com
     Init with your API Key (get at https://apexlegendsapi.com)
 """
-
 import json
 import requests
-from base import ALPlatform, ALAction
+from .al_domain import ALPlayer
+from .al_base import ALPlatform, ALAction
 
 
 class ApexLegendsAPI:
@@ -37,6 +37,35 @@ class ApexLegendsAPI:
         if isinstance(response_text, dict):
             response_text = [response_text]
         return response_text
+
+    def get_player(self, name: str, platform: ALPlatform) -> ALPlayer:
+        """
+        Retrieve the ALPlayer object you can load all the data on init, or via
+        specific calls later.
+
+        NOTE:
+            Player must exist, method will return None if the player cannot be found
+        :param name: Name of the player
+        :param platform: see ALPlatform for all types
+        :return: a single player or None if no player is found
+        :rtype: ALPlayer
+        """
+        player = ALPlayer(name=name, platform=platform)
+        if platform == ALPlatform.PC:
+            origin_info = self.get_player_origin(player_name=name)
+            assert len(origin_info) == 1
+            player.origin_info = origin_info[0]
+
+        match_history_players_tracked = self.match_history(
+            player_name=name,
+            platform=platform,
+            action=ALAction.INFO
+        )[0]
+        for tracked_player in match_history_players_tracked['data']:
+            if tracked_player['name'] == name and tracked_player['platform'] == platform.value:
+                player.matches_tracked = True
+
+        return player
 
     def basic_player_stats(self, player_name: str, platform: ALPlatform) -> list:
         """
@@ -87,3 +116,27 @@ class ApexLegendsAPI:
         endpoint = f"player={player_name}" \
                    f"{show_hits_string}"
         return self.make_request(base_url=base_url, endpoint=endpoint)
+
+    def delete_all_tracked_players(self):
+        """
+        This will retrieve a list of all tracked players,
+        and call the 'delete' api for each of them.
+        Use with caution!
+
+        NOTE:
+            This action cannot be undone, proceed only if you know what you are doing
+        """
+        player_info_endpoint = "&history=1&action=info"
+        response = self.make_request(player_info_endpoint)
+        player_list = response[0]['data']
+        num_players = len(player_list)
+        for player in player_list:
+            platform = ALPlatform(player['platform'])
+            del_response = self.match_history(
+                player_name=player['name'],
+                platform=platform,
+                action=ALAction.DELETE
+            )
+            new_player_list = del_response[0]['data']
+            num_players -= 1
+            assert len(new_player_list) == num_players
