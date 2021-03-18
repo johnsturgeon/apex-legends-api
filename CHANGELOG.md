@@ -9,7 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.0]
 ### Changed
+- Re-arranged module files and imports
+   - `al_base` is where utility / base classes will go that are shared across modules
+   - `al_api` is the core API interface class
+   - `al_domain` is the module that will contain all of the 'domain' based 
+     classes such as `ALPlayer` (eventually 'matches', etc...)
 - Class renames (which will change the API).  Now all classes are prefixed with `AL` (Apex Legends)
+- Updated README.md to reflect the changes
+
+### Added
+- Added 'Player' class
+- Added new method to the API to delete all tracked players
 
 ## [0.2.1]
 ### Changed
