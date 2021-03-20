@@ -32,6 +32,9 @@ class ApexLegendsAPI:
         response_text = {}
         if response.status_code == 200:
             response_text = json.loads(response.text)
+            # FIXME: This should not be checked in as part of the final merge
+            with open('response.json', 'w') as f_name:
+                json.dump(response_text, f_name, indent=4)
 
         # sometimes we get a pure dictionary back, let's wrap it in a list for consistency
         if isinstance(response_text, dict):
@@ -50,22 +53,9 @@ class ApexLegendsAPI:
         :return: a single player or None if no player is found
         :rtype: ALPlayer
         """
-        player = ALPlayer(name=name, platform=platform)
-        if platform == ALPlatform.PC:
-            origin_info = self.get_player_origin(player_name=name)
-            assert len(origin_info) == 1
-            player.origin_info = origin_info[0]
-
-        match_history_players_tracked = self.match_history(
-            player_name=name,
-            platform=platform,
-            action=ALAction.INFO
-        )[0]
-        for tracked_player in match_history_players_tracked['data']:
-            if tracked_player['name'] == name and tracked_player['platform'] == platform.value:
-                player.matches_tracked = True
-
-        return player
+        basic_player_stats = self.basic_player_stats(name, platform)
+        assert len(basic_player_stats) == 1
+        return ALPlayer(basic_player_stats_data=basic_player_stats[0])
 
     def basic_player_stats(self, player_name: str, platform: ALPlatform) -> list:
         """
