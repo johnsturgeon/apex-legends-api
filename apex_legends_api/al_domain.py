@@ -2,10 +2,61 @@
 Player class for the Apex Legends API Python package
 """
 import arrow
-from .al_base import ALPlatform, description  # noqa E0402
+from .al_base import ALEventType, ALPlatform  # noqa E0402
 
 
 # pylint: disable=too-few-public-methods
+class Event:
+    """ parent class for apex-legend events """
+    def __init__(self, event_dict: dict):
+        self.uid: int = event_dict.get('uid')
+        self.player: str = event_dict.get('player')
+        self.timestamp: int = event_dict.get('timestamp')
+        self.event_type: ALEventType = ALEventType(value=event_dict.get('eventType'))
+
+
+class GameEvent(Event):
+    """ Event sub class for 'game' events """
+    def __init__(self, event_dict: dict):
+        super().__init__(event_dict)
+        self.xp_progress: int = event_dict.get('xpProgress')
+        self.game_length: int = event_dict.get('gameLength')
+        self.legend_played: str = event_dict.get('legendPlayed')
+        self.rank_score_change: str = event_dict.get('rankScoreChange')
+        self.game_data_trackers: list[DataTrackers] = list()
+        for tracker in event_dict.get('event'):
+            self.game_data_trackers.append(DataTrackers(tracker))
+
+
+class SessionEvent(Event):
+    """ event subclass for "session" events (leave / join) """
+    def __init__(self, event_dict: dict):
+        super().__init__(event_dict)
+        event_detail: dict = event_dict.get('event')
+        self.action: str = event_detail.get('action')
+        if self.action == 'leave':
+            self.session_duration: int = event_detail.get('sessionDuration')
+        else:
+            self.session_duration: int = 0
+
+
+class LevelEvent(Event):
+    """ event subclass for 'level' events (level up) """
+    def __init__(self, event_dict: dict):
+        super().__init__(event_dict)
+        self.new_level = event_dict.get('event').get('newLevel')
+
+
+def event_factory(event_dict: dict) -> Event:
+    """ a factory method for the different event types"""
+    event_classes = {
+        "Session": SessionEvent,
+        "Level": LevelEvent,
+        "Game": GameEvent
+    }
+    return event_classes[event_dict.get('eventType')](event_dict)
+
+
 class GlobalInfo:
     """ a data structure for the global player info """
     # pylint: disable=too-many-instance-attributes
@@ -18,9 +69,6 @@ class GlobalInfo:
             self.is_active: bool = bool(bans_dict.get('isActive'))
             self.seconds_remaining: int = bans_dict.get('remainingSeconds')
 
-        def __str__(self):
-            return description(self)
-
     class Rank:
         """ data structure for player rank information """
         def __init__(self, rank_dict: dict):
@@ -30,9 +78,6 @@ class GlobalInfo:
             self.ladder_pos_platform: int = rank_dict.get('ladderPosPlatform')
             self.image_url: str = rank_dict.get('rankImg')
             self.season: str = rank_dict.get('rankedSeason')
-
-        def __str__(self):
-            return description(self)
 
         @property
         def rank_division_roman(self) -> str:
@@ -58,9 +103,6 @@ class GlobalInfo:
         self.bans: GlobalInfo.Bans = GlobalInfo.Bans(bans_dict=global_dict.get('bans'))
         self.rank: GlobalInfo.Rank = GlobalInfo.Rank(rank_dict=global_dict.get('rank'))
 
-    def __str__(self):
-        return description(self)
-
 
 class RealtimeInfo:
     """ a data structure for the player's real time information """
@@ -72,9 +114,6 @@ class RealtimeInfo:
         self.party_full: bool = bool(realtime_dict.get('partyFull'))
         self.selected_legend: str = realtime_dict.get('selectedLegend')
 
-    def __str__(self):
-        return description(self)
-
 
 class DataTrackers:
     """ data structure for badges """
@@ -83,18 +122,12 @@ class DataTrackers:
         self.value = data_trackers_dict.get('value')
         self.key = data_trackers_dict.get('key')
 
-    def __str__(self):
-        return description(self)
-
 
 class ImgAssets:
     """ data structure for image assets """
     def __init__(self, image_asset_dict: dict):
         self.icon = image_asset_dict.get('icon')
         self.banner = image_asset_dict.get('banner')
-
-    def __str__(self):
-        return description(self)
 
 
 class SelectedLegend:
@@ -107,9 +140,6 @@ class SelectedLegend:
                 self.name = badge_dict.get('name')
                 self.value = badge_dict.get('value')
 
-            def __str__(self):
-                return description(self)
-
         def __init__(self, game_info_dict: dict):
             self.skin = game_info_dict.get('skin')
             self.frame = game_info_dict.get('frame')
@@ -119,9 +149,6 @@ class SelectedLegend:
             for badge in game_info_dict.get('badges'):
                 self.badges.append(SelectedLegend.GameInfo.Badge(badge))
 
-        def __str__(self):
-            return description(self)
-
     def __init__(self, selected_legend_dict: dict):
         self.legend_name = selected_legend_dict.get('LegendName')
         self.data_trackers = list()
@@ -129,9 +156,6 @@ class SelectedLegend:
             self.data_trackers.append(DataTrackers(data_tracker))
         self.game_info = SelectedLegend.GameInfo(selected_legend_dict.get('gameInfo'))
         self.img_assets = ImgAssets(selected_legend_dict.get('ImgAssets'))
-
-    def __str__(self):
-        return description(self)
 
 
 class Legend:
@@ -144,9 +168,6 @@ class Legend:
                 self.data_trackers.append(DataTrackers(data_tracker))
         self.img_assets = ImgAssets(legend_dict.get('ImgAssets'))
 
-    def __str__(self):
-        return description(self)
-
 
 class ALPlayer:
     """
@@ -157,10 +178,12 @@ class ALPlayer:
         To populate the values, there are convenience methods on the ApexLegendsAPI class
     """
 
-    def __init__(self, basic_player_stats_data: dict):
+    def __init__(self, basic_player_stats_data: dict, match_history: list = None):
         """ Init the object with the player's name and platform """
         self.global_info: GlobalInfo = GlobalInfo(global_dict=basic_player_stats_data['global'])
-        self.realtime_info: RealtimeInfo = RealtimeInfo(realtime_dict=basic_player_stats_data['realtime'])
+        self.realtime_info: RealtimeInfo = RealtimeInfo(
+            realtime_dict=basic_player_stats_data['realtime']
+        )
         self.matches_tracked: bool = False
         self.timestamp_last_checked: int = arrow.utcnow().int_timestamp
         self.selected_legend: SelectedLegend = SelectedLegend(
@@ -169,6 +192,8 @@ class ALPlayer:
         self.all_legends: list[Legend] = list()
         for legend_name, legend_dict in basic_player_stats_data['legends']['all'].items():
             self.all_legends.append(Legend(legend_name=legend_name, legend_dict=legend_dict))
-
-    def __str__(self):
-        return description(self)
+        self.match_history = list()
+        if match_history:
+            for event in match_history:
+                event_result = event_factory(event_dict=event)
+                self.match_history.append(event_result)

@@ -4,27 +4,24 @@ contains some of the base / utility classes and Enums
 """
 from enum import Enum
 
-DESCRIPTION_DEPTH: int = 0
 
-
-def description(obj) -> str:
-    """ utility method for returning a string describing the object given """
-    global DESCRIPTION_DEPTH  # noqa W0603
-    DESCRIPTION_DEPTH += 1
-    tabs = ""
-    for _ in range(1, DESCRIPTION_DEPTH):
-        tabs += "\t"
-    # return_str: str = f"\n{tabs}" + type(obj).__name__ + "\n"
-    return_str: str = "\n"
-    for attribute_name, attribute_value in obj.__dict__.items():
-        if isinstance(attribute_value, list):
-            return_str += f"{tabs}{attribute_name}:"
-            for inner_attribute in attribute_value:
-                return_str += f"{tabs}{inner_attribute}"
+def print_description(___class, indent=0, hide_values=False):
+    """ prints the schema for the current object """
+    print(' ' * indent + type(___class).__name__ + ':')
+    indent += 4
+    for k, value in ___class.__dict__.items():
+        if not isinstance(value, list):
+            v_list = [value]
         else:
-            return_str += f"{tabs}{attribute_name}: {attribute_value}\n"
-    DESCRIPTION_DEPTH -= 1
-    return return_str
+            v_list = value
+        for val in v_list:
+            if '__dict__' in dir(val):
+                print_description(val, indent)
+            else:
+                if hide_values:
+                    print(' ' * indent + k)
+                else:
+                    print(' ' * indent + k + ': ' + str(val))
 
 
 class ALPlatform(Enum):
@@ -40,3 +37,10 @@ class ALAction(Enum):
     GET = "get"  # return ALL tracked events for the player
     ADD = "add"  # adds the player for history collection
     DELETE = "delete"  # removes the given user from the tracked users list
+
+
+class ALEventType(Enum):
+    """ the three different event types """
+    SESSION = 'Session'
+    GAME = 'Game'
+    LEVEL = 'Level'

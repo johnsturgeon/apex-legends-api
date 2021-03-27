@@ -7,8 +7,8 @@ https://apexlegendsapi.com
 """
 import json
 import requests
-from .al_domain import ALPlayer
-from .al_base import ALPlatform, ALAction
+from .al_domain import ALPlayer  # noqa E0402
+from .al_base import ALPlatform, ALAction  # noqa E0402
 
 
 class ApexLegendsAPI:
@@ -31,10 +31,10 @@ class ApexLegendsAPI:
         response = self.session.get(url)
         response_text = {}
         if response.status_code == 200:
-            response_text = json.loads(response.text)
-            # FIXME: This should not be checked in as part of the final merge
-            with open('response.json', 'w') as f_name:
-                json.dump(response_text, f_name, indent=4)
+            try:
+                response_text = json.loads(response.text)
+            except ValueError as _:
+                response_text = response.text
 
         # sometimes we get a pure dictionary back, let's wrap it in a list for consistency
         if isinstance(response_text, dict):
@@ -55,7 +55,22 @@ class ApexLegendsAPI:
         """
         basic_player_stats = self.basic_player_stats(name, platform)
         assert len(basic_player_stats) == 1
-        return ALPlayer(basic_player_stats_data=basic_player_stats[0])
+        match_history_info: list = self.match_history(
+            player_name=name,
+            platform=platform,
+            action=ALAction.INFO
+        )
+        match_history = list()
+        tracked_player: dict
+        for tracked_player in match_history_info[0].get('data'):
+            if name == tracked_player.get('name') and \
+                    platform.value == tracked_player.get('platform'):
+                match_history = self.match_history(
+                    player_name=name,
+                    platform=platform,
+                    action=ALAction.GET
+                )
+        return ALPlayer(basic_player_stats_data=basic_player_stats[0], match_history=match_history)
 
     def basic_player_stats(self, player_name: str, platform: ALPlatform) -> list:
         """
