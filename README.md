@@ -17,10 +17,11 @@ You can install it from source, or pip (recommended)
 
 ```python
 from apex_legends_api import ApexLegendsAPI, ALPlatform, ALAction, ALPlayer
+from apex_legends_api.al_base import print_description
 
 api = ApexLegendsAPI(api_key='<api_key>')
 
-player_name = '<PlayerName>'
+player_name = str("PlayerName")
 platform = ALPlatform.PC
 action = ALAction.GET
 
@@ -37,8 +38,7 @@ print(origin_player)
 # Example 2:
 # retrieve an 'ALPlayer' object
 player: ALPlayer = api.get_player(name=player_name, platform=platform)
-print(player.origin_info)
-print(player.matches_tracked)
+print_description(player)
 
 ```
 ## Notes
