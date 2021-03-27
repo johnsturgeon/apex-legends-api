@@ -5,7 +5,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- Modify the API usage so that it returns first class Objects instead of just a list
+- Modify the API 
+
+## [1.0.0] First Major release
+### Summary of changes
+This release represents the biggest change for the API to date.  Essentially, all interaction
+can now be done through the `ALPlayer` class.  See the README.md for usage.
+
+### Added
+- `ALPlayer` class now pulls all the data including events if the player is being tracked.
+- New convenience method `print_description` for dumping a player class to a readable format
+- `ALPlayer` is structured to match the json response from the API
+
+### Changed
+- Player history is automatically added to the player class when created by the API
+- Arrow library is now required for timestamp parsing
+
+### Fixed
+- Response for non-tracked player no longer throws an uncaught exception
 
 ## [0.3.0]
 ### Changed

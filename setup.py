@@ -1,3 +1,4 @@
+""" setup script for apex_legends_api """
 from setuptools import setup
 
 with open('README.md') as f:
@@ -8,7 +9,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='apex-legends-api',
-    version='0.3.0',
+    version='1.0.0',
     packages=['apex_legends_api'],
     python_requires='>=3.6.*',
     url='https://github.com/johnsturgeon/apex-legends-api',
