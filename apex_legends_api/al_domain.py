@@ -23,7 +23,7 @@ class GameEvent(Event):
         self.game_length: int = event_dict.get('gameLength')
         self.legend_played: str = event_dict.get('legendPlayed')
         self.rank_score_change: str = event_dict.get('rankScoreChange')
-        self.game_data_trackers: list[DataTrackers] = list()
+        self.game_data_trackers: list = list()
         for tracker in event_dict.get('event'):
             self.game_data_trackers.append(DataTrackers(tracker))
 
