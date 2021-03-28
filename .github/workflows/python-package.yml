@@ -38,4 +38,5 @@ jobs:
       run: |
         pip install pytest
         pip install pytest-cov
+        pip install requests-mock
         pytest --cov=apex_legends_api -v
