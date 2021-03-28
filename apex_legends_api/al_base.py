@@ -40,7 +40,8 @@ class ALAction(Enum):
 
 
 class ALEventType(Enum):
-    """ the three different event types """
+    """ the four different event types """
     SESSION = 'Session'
     GAME = 'Game'
     LEVEL = 'Level'
+    RANK = 'Rank'
