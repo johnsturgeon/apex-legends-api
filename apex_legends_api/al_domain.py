@@ -197,10 +197,10 @@ class ALPlayer:
         self.selected_legend: SelectedLegend = SelectedLegend(
             selected_legend_dict=basic_player_stats_data['legends']['selected']
         )
-        self.all_legends: list[Legend] = list()
+        self.all_legends: list = list()
         for legend_name, legend_dict in basic_player_stats_data['legends']['all'].items():
             self.all_legends.append(Legend(legend_name=legend_name, legend_dict=legend_dict))
-        self.match_history = list()
+        self.match_history: list = list()
         if match_history:
             for event in match_history:
                 event_result = event_factory(event_dict=event)
