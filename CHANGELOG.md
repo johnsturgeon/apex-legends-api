@@ -5,7 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- Modify the API 
+- Add cli for configuring legends for tracking (#23)
+
+## [1.0.1]
+### Added
+- Added ranked progression event to list of Events tracked (thanks @CondensedTea)
 
 ## [1.0.0] First Major release
 ### Summary of changes

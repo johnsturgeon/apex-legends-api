@@ -1,0 +1,476 @@
+{
+    "global": {
+        "name": "Player",
+        "uid": "0000000000000",
+        "avatar": "avatar.JPEG",
+        "platform": "PC",
+        "level": 100,
+        "toNextLevelPercent": 0,
+        "internalUpdateCount": 0,
+        "bans": {
+            "isActive": false,
+            "remainingSeconds": 0,
+            "last_banReason": "NONE"
+        },
+        "rank": {
+            "rankScore": 3064,
+            "rankName": "Gold",
+            "rankDiv": 4,
+            "ladderPos": -1,
+            "rankImg": "https:\/\/api.mozambiquehe.re\/assets\/ranks\/gold4.png",
+            "rankedSeason": "season08_split_2"
+        },
+        "battlepass": {
+            "level": "-1",
+            "history": {
+                "season1": -1,
+                "season2": -1,
+                "season3": -1,
+                "season4": -1,
+                "season5": -1,
+                "season6": -1,
+                "season7": -1,
+                "season8": -1
+            }
+        }
+    },
+    "realtime": {
+        "lobbyState": "open",
+        "isOnline": 0,
+        "isInGame": 0,
+        "canJoin": 0,
+        "partyFull": 0,
+        "selectedLegend": "Gibraltar"
+    },
+    "legends": {
+        "selected": {
+            "LegendName": "Gibraltar",
+            "data": [
+                {
+                    "name": "Season 8 kills",
+                    "value": 187,
+                    "key": "kills_season_8"
+                },
+                {
+                    "name": "Shotgun kills",
+                    "value": 77,
+                    "key": "shotgun_kills"
+                },
+                {
+                    "name": "Season 8 wins",
+                    "value": 11,
+                    "key": "wins_season_8"
+                }
+            ],
+            "gameInfo": {
+                "skin": "Gate Keeper",
+                "frame": "Full Steam",
+                "pose": "Sky Show",
+                "intro": "None",
+                "badges": [
+                    {
+                        "name": "Account Level",
+                        "value": 192
+                    },
+                    {
+                        "name": "Gibraltar's Wrath",
+                        "value": 0
+                    },
+                    {
+                        "name": "Black Lives Matter",
+                        "value": 0
+                    }
+                ]
+            },
+            "ImgAssets": {
+                "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/gibraltar.png",
+                "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/gibraltar.jpg"
+            }
+        },
+        "all": {
+            "Bangalore": {
+                "data": [
+                    {
+                        "name": "Season 8 wins",
+                        "value": 2,
+                        "key": "wins_season_8"
+                    },
+                    {
+                        "name": "Special event kills",
+                        "value": 150,
+                        "key": "specialEvent_kills"
+                    },
+                    {
+                        "name": "Special event damage",
+                        "value": 46221,
+                        "key": "specialEvent_damage"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/bangalore.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/bangalore.jpg"
+                }
+            },
+            "Bloodhound": {
+                "data": [
+                    {
+                        "name": "Enemies scanned",
+                        "value": 1052,
+                        "key": "enemies_scanned"
+                    },
+                    {
+                        "name": "Traps scanned",
+                        "value": 382,
+                        "key": "traps_scanned"
+                    },
+                    {
+                        "name": "Season 8 kills",
+                        "value": 109,
+                        "key": "kills_season_8"
+                    },
+                    {
+                        "name": "Season 8 wins",
+                        "value": 7,
+                        "key": "wins_season_8"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/bloodhound.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/bloodhound.jpg"
+                }
+            },
+            "Lifeline": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 79,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Season 8 kills",
+                        "value": 30,
+                        "key": "kills_season_8"
+                    },
+                    {
+                        "name": "Season 8 wins",
+                        "value": 0,
+                        "key": "wins_season_8"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/lifeline.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/lifeline.jpg"
+                }
+            },
+            "Caustic": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 5,
+                        "key": "kills"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/caustic.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/caustic.jpg"
+                }
+            },
+            "Gibraltar": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 175,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Shotgun kills",
+                        "value": 77,
+                        "key": "shotgun_kills"
+                    },
+                    {
+                        "name": "Season 8 kills",
+                        "value": 187,
+                        "key": "kills_season_8"
+                    },
+                    {
+                        "name": "Season 8 wins",
+                        "value": 11,
+                        "key": "wins_season_8"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/gibraltar.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/gibraltar.jpg"
+                }
+            },
+            "Mirage": {
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/mirage.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/mirage.jpg"
+                }
+            },
+            "Pathfinder": {
+                "data": [
+                    {
+                        "name": "Season 8 kills",
+                        "value": 26,
+                        "key": "kills_season_8"
+                    },
+                    {
+                        "name": "Special event kills",
+                        "value": 75,
+                        "key": "specialEvent_kills"
+                    },
+                    {
+                        "name": "Special event damage",
+                        "value": 22291,
+                        "key": "specialEvent_damage"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/pathfinder.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/pathfinder.jpg"
+                }
+            },
+            "Wraith": {
+                "data": [
+                    {
+                        "name": "Season 8 wins",
+                        "value": 4,
+                        "key": "wins_season_8"
+                    },
+                    {
+                        "name": "Special event kills",
+                        "value": 268,
+                        "key": "specialEvent_kills"
+                    },
+                    {
+                        "name": "Special event damage",
+                        "value": 95985,
+                        "key": "specialEvent_damage"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/wraith.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/wraith.jpg"
+                }
+            },
+            "Octane": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 209,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "AR kills",
+                        "value": 57,
+                        "key": "ar_kills"
+                    },
+                    {
+                        "name": "Season 8 wins",
+                        "value": 2,
+                        "key": "wins_season_8"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/octane.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/octane.jpg"
+                }
+            },
+            "Wattson": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 13,
+                        "key": "kills"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/wattson.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/wattson.jpg"
+                }
+            },
+            "Crypto": {
+                "data": [
+                    {
+                        "name": "Special event kills",
+                        "value": 28,
+                        "key": "specialEvent_kills"
+                    },
+                    {
+                        "name": "Special event damage",
+                        "value": 14134,
+                        "key": "specialEvent_damage"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/crypto.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/crypto.jpg"
+                }
+            },
+            "Revenant": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 20,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "AR kills",
+                        "value": 0,
+                        "key": "ar_kills"
+                    },
+                    {
+                        "name": "Silenced targets kills",
+                        "value": 12,
+                        "key": "silenced_targets_kills"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/revenant.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/revenant.jpg"
+                }
+            },
+            "Loba": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 9,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Loot taken from ultimate",
+                        "value": 17,
+                        "key": "ultimate_loot_taken"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/loba.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/loba.jpg"
+                }
+            },
+            "Rampart": {
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/rampart.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/rampart.jpg"
+                }
+            },
+            "Horizon": {
+                "data": [
+                    {
+                        "name": "Winning kills",
+                        "value": 9,
+                        "key": "winning_kills"
+                    },
+                    {
+                        "name": "Shotgun kills",
+                        "value": 182,
+                        "key": "shotgun_kills"
+                    },
+                    {
+                        "name": "Season 8 kills",
+                        "value": 537,
+                        "key": "kills_season_8"
+                    },
+                    {
+                        "name": "Season 8 wins",
+                        "value": 28,
+                        "key": "wins_season_8"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/horizon.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/horizon.jpg"
+                }
+            },
+            "Fuse": {
+                "data": [
+                    {
+                        "name": "Season 8 kills",
+                        "value": 42,
+                        "key": "kills_season_8"
+                    },
+                    {
+                        "name": "Season 8 wins",
+                        "value": 1,
+                        "key": "wins_season_8"
+                    },
+                    {
+                        "name": "Special event damage",
+                        "value": 14704,
+                        "key": "specialEvent_damage"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/fuse.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/fuse.jpg"
+                }
+            }
+        }
+    },
+    "mozambiquehere_internal": {
+        "isNewToDB": true,
+        "claimedBy": "-1",
+        "APIAccessType": "PREMIUM",
+        "ClusterID": "24",
+        "rate_limit": {
+            "max_per_second": 30,
+            "current_req": "1"
+        }
+    },
+    "total": {
+        "wins_season_8": {
+            "name": "Season 8 wins",
+            "value": 55
+        },
+        "specialEvent_kills": {
+            "name": "Special event kills",
+            "value": 521
+        },
+        "specialEvent_damage": {
+            "name": "Special event damage",
+            "value": 193335
+        },
+        "enemies_scanned": {
+            "name": "Enemies scanned",
+            "value": 1052
+        },
+        "traps_scanned": {
+            "name": "Traps scanned",
+            "value": 382
+        },
+        "kills_season_8": {
+            "name": "Season 8 kills",
+            "value": 931
+        },
+        "kills": {
+            "name": "Kills",
+            "value": 510
+        },
+        "shotgun_kills": {
+            "name": "Shotgun kills",
+            "value": 259
+        },
+        "ar_kills": {
+            "name": "AR kills",
+            "value": 57
+        },
+        "silenced_targets_kills": {
+            "name": "Silenced targets kills",
+            "value": 12
+        },
+        "ultimate_loot_taken": {
+            "name": "Loot taken from ultimate",
+            "value": 17
+        },
+        "winning_kills": {
+            "name": "Winning kills",
+            "value": 9
+        },
+        "kd": {
+            "value": -1,
+            "name": "KD"
+        }
+    }
+}

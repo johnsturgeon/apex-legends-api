@@ -33,7 +33,7 @@ class ApexLegendsAPI:
         if response.status_code == 200:
             try:
                 response_text = json.loads(response.text)
-            except ValueError as _:
+            except ValueError:
                 response_text = response.text
 
         # sometimes we get a pure dictionary back, let's wrap it in a list for consistency
