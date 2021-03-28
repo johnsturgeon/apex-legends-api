@@ -47,12 +47,20 @@ class LevelEvent(Event):
         self.new_level = event_dict.get('event').get('newLevel')
 
 
+class RankEvent(Event):
+    """ event subclass for 'rank' events (ranked progression)"""
+    def __init__(self, event_dict: dict):
+        super().__init__(event_dict)
+        self.new_rank = event_dict.get('event').get('newRank')
+
+
 def event_factory(event_dict: dict) -> Event:
     """ a factory method for the different event types"""
     event_classes = {
         "Session": SessionEvent,
         "Level": LevelEvent,
-        "Game": GameEvent
+        "Game": GameEvent,
+        "Rank": RankEvent
     }
     return event_classes[event_dict.get('eventType')](event_dict)
 
