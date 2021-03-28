@@ -1,12 +1,14 @@
+""" configure test fixtures """
 import json
 import pytest
 import requests_mock
 
 
+# pylint: disable=missing-function-docstring
 @pytest.fixture()
 def mock():
-    with requests_mock.Mocker() as mock:
-        yield mock
+    with requests_mock.Mocker() as ___mock:
+        yield ___mock
 
 
 @pytest.fixture()
