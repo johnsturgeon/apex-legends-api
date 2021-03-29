@@ -3,6 +3,7 @@ al_base.py
 contains some of the base / utility classes and Enums
 """
 from enum import Enum
+import requests
 
 
 def print_description(___class, indent=0, hide_values=False):
@@ -45,3 +46,10 @@ class ALEventType(Enum):
     GAME = 'Game'
     LEVEL = 'Level'
     RANK = 'Rank'
+
+
+class ALHTTPExceptionFromResponse(Exception):
+    """ Exception raised for errors in the http request. """
+    def __init__(self, response: requests.Response):
+        self.message = f'Return Code: {response.status_code} - {response.text}'
+        super().__init__(self.message)
