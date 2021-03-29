@@ -8,7 +8,7 @@ https://apexlegendsapi.com
 import json
 import requests
 from .al_domain import ALPlayer  # noqa E0402
-from .al_base import ALPlatform, ALAction  # noqa E0402
+from .al_base import ALPlatform, ALAction, ALHTTPExceptionFromResponse  # noqa E0402
 
 
 class ApexLegendsAPI:
@@ -28,13 +28,15 @@ class ApexLegendsAPI:
         if not base_url:
             base_url = self.base_url
         url: str = base_url + endpoint
-        response = self.session.get(url)
+        response: requests.Response = self.session.get(url)
         response_text = {}
         if response.status_code == 200:
             try:
                 response_text = json.loads(response.text)
             except ValueError:
                 response_text = response.text
+        else:
+            raise ALHTTPExceptionFromResponse(response)
 
         # sometimes we get a pure dictionary back, let's wrap it in a list for consistency
         if isinstance(response_text, dict):
