@@ -54,7 +54,8 @@ def test_get_player(
     mock.register_uri('GET', player_url, json=basic_player_stats_response)
     mock.register_uri('GET', history_get_url, json=match_history_get_response)
     mock.register_uri('GET', history_info_url, json=match_history_info_response)
-    response = api.get_player(name=player_name, platform=platform)
+    response = api.get_player(name=player_name, platform=platform, match_history_limit=1)
     assert isinstance(response, ALPlayer)
+    assert len(response.match_history) == 1
     assert response.global_info.name == player_name
     assert response.match_history[0].action == 'leave'

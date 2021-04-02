@@ -8,41 +8,5 @@
             "action": "leave",
             "sessionDuration": 122
         }
-    },
-    {
-        "uid": "0000000000000",
-        "player": "Player",
-        "timestamp": 1616878856,
-        "eventType": "Level",
-        "event": {
-            "newLevel": 193
-        }
-    },
-    {
-        "uid": "0000000000000",
-        "player": "Player",
-        "timestamp": 1616878856,
-        "eventType": "Rank",
-        "event": {
-            "newRank": "Gold 3",
-            "newRankImg": "http:\/\/api.apexlegendsstatus.com\/assets\/ranks\/.png"
-        }
-    },
-    {
-        "uid": "0000000000000",
-        "player": "Player",
-        "timestamp": 1616878856,
-        "eventType": "Game",
-        "xpProgress": 12060,
-        "gameLength": 24,
-        "legendPlayed": "Gibraltar",
-        "rankScoreChange": "116",
-        "event": [
-            {
-                "value": 1,
-                "key": "kills_season_8",
-                "name": "Season 8 kills"
-            }
-        ]
     }
 ]
