@@ -16,20 +16,23 @@ class ApexLegendsAPI:
     Main class that wraps the API at apex
     """
     api_version = "5"
-    base_url = f"https://api.mozambiquehe.re/bridge?version={api_version}"
+    base_params = {'version': api_version}
+    base_url = "https://api.mozambiquehe.re/bridge"
 
     def __init__(self, api_key: str):
         """ Initialize with the API Key """
         self.session = requests.Session()
         self.session.headers.update({'Authorization': api_key})
 
-    def make_request(self, endpoint: str, base_url: str = None) -> list:
+    def make_request(self, additional_params: dict, new_base_url: str = None) -> list:
         """ Send the request to the apex legends api """
-        if not base_url:
-            base_url = self.base_url
-        url: str = base_url + endpoint
-        response: requests.Response = self.session.get(url)
-        response_text = {}
+        if new_base_url:
+            url: str = new_base_url
+            params: dict = additional_params
+        else:
+            url: str = self.base_url
+            params: dict = dict(self.base_params, **additional_params)
+        response: requests.Response = self.session.get(url, params=params)
         if response.status_code == 200:
             try:
                 response_text = json.loads(response.text)
@@ -84,8 +87,8 @@ class ApexLegendsAPI:
         :param platform: (see Platform enum for values)
         :return: List of player stats created from response json
         """
-        endpoint = f"&platform={platform.value}&player={player_name}"
-        return self.make_request(endpoint)
+        params = {'platform': platform.value, 'player': player_name}
+        return self.make_request(additional_params=params)
 
     def match_history(self, player_name: str, platform: ALPlatform, action: ALAction) -> list:
         """
@@ -102,11 +105,13 @@ class ApexLegendsAPI:
         :param action: see Action enum for values
         :return: List of history created from response json
         """
-        endpoint = f"&platform={platform.value}" \
-                   f"&player={player_name}" \
-                   f"&history=1" \
-                   f"&action={action.value}"
-        return self.make_request(endpoint)
+        params = {
+            'platform': platform.value,
+            'player': player_name,
+            'history': 1,
+            'action': action.value
+        }
+        return self.make_request(additional_params=params)
 
     def get_player_origin(self, player_name: str, show_all_hits: bool = False) -> list:
         """
@@ -116,13 +121,11 @@ class ApexLegendsAPI:
         :param show_all_hits: True to 'search' for player (show multiple hits), default False
         :return: list of results
         """
-        show_hits_string = ""
+        new_base_url = "https://api.mozambiquehe.re/origin?"
+        new_base_url += f"&player={player_name}"
         if show_all_hits:
-            show_hits_string = "&showAllHits"
-        base_url = "https://api.mozambiquehe.re/origin?"
-        endpoint = f"player={player_name}" \
-                   f"{show_hits_string}"
-        return self.make_request(base_url=base_url, endpoint=endpoint)
+            new_base_url += "&showAllHits"
+        return self.make_request(new_base_url=new_base_url, additional_params={})
 
     def delete_all_tracked_players(self):
         """
@@ -133,8 +136,8 @@ class ApexLegendsAPI:
         NOTE:
             This action cannot be undone, proceed only if you know what you are doing
         """
-        player_info_endpoint = "&history=1&action=info"
-        response = self.make_request(player_info_endpoint)
+        params = {'history': 1, 'action': 'info'}
+        response = self.make_request(additional_params=params)
         player_list = response[0]['data']
         num_players = len(player_list)
         for player in player_list:

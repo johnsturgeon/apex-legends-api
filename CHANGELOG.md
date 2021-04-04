@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Throws exception if API request fails (#9)
+- [internal] Changed query arguments from f-strings to request params (#34)
 
 ## [1.0.1]
 ### Added
