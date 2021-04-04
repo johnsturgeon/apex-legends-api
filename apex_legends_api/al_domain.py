@@ -25,7 +25,7 @@ class GameEvent(Event):
         self.rank_score_change: str = event_dict.get('rankScoreChange')
         self.game_data_trackers: list = list()
         for tracker in event_dict.get('event'):
-            self.game_data_trackers.append(DataTrackers(tracker))
+            self.game_data_trackers.append(DataTracker(tracker))
 
 
 class SessionEvent(Event):
@@ -123,7 +123,7 @@ class RealtimeInfo:
         self.selected_legend: str = realtime_dict.get('selectedLegend')
 
 
-class DataTrackers:
+class DataTracker:
     """ data structure for badges """
     def __init__(self, data_trackers_dict: dict):
         self.name = data_trackers_dict.get('name')
@@ -131,7 +131,7 @@ class DataTrackers:
         self.key = data_trackers_dict.get('key')
 
 
-class ImgAssets:
+class ImgAsset:
     """ data structure for image assets """
     def __init__(self, image_asset_dict: dict):
         self.icon = image_asset_dict.get('icon')
@@ -161,9 +161,9 @@ class SelectedLegend:
         self.legend_name = selected_legend_dict.get('LegendName')
         self.data_trackers = list()
         for data_tracker in selected_legend_dict.get('data'):
-            self.data_trackers.append(DataTrackers(data_tracker))
+            self.data_trackers.append(DataTracker(data_tracker))
         self.game_info = SelectedLegend.GameInfo(selected_legend_dict.get('gameInfo'))
-        self.img_assets = ImgAssets(selected_legend_dict.get('ImgAssets'))
+        self.img_assets = ImgAsset(selected_legend_dict.get('ImgAssets'))
 
 
 class Legend:
@@ -173,8 +173,8 @@ class Legend:
         self.data_trackers = list()
         if legend_dict.get('data'):
             for data_tracker in legend_dict.get('data'):
-                self.data_trackers.append(DataTrackers(data_tracker))
-        self.img_assets = ImgAssets(legend_dict.get('ImgAssets'))
+                self.data_trackers.append(DataTracker(data_tracker))
+        self.img_assets = ImgAsset(legend_dict.get('ImgAssets'))
 
 
 class ALPlayer:
