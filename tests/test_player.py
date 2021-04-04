@@ -47,11 +47,11 @@ def test_get_player(
     base_url_version = f"{BASE_URL}?version={VERSION}"
     player_url = base_url_version + f"&platform={platform.value}&player={player_name}"
     history_get_url = base_url_version + f"&platform={platform.value}" \
-                                                 f"&player={player_name}" \
-                                                 f"&history=1&action=GET"
+                                         f"&player={player_name}" \
+                                         f"&history=1&action=GET"
     history_info_url = base_url_version + f"&platform={platform.value}" \
-                                                  f"&player={player_name}" \
-                                                  f"&history=1&action=INFO"
+                                          f"&player={player_name}" \
+                                          f"&history=1&action=INFO"
     mock.register_uri('GET', player_url, json=basic_player_stats_response)
     mock.register_uri('GET', history_get_url, json=match_history_get_response)
     mock.register_uri('GET', history_info_url, json=match_history_info_response)
