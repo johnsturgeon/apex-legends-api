@@ -34,7 +34,7 @@ action = ALAction.GET
 # straight API calls
 try:
     basic = api.basic_player_stats(player_name=player_name, platform=platform)
-    history = api.match_history(player_name=player_name, platform=platform, action=action)
+    history = api.events(player_name=player_name, platform=platform, action=action)
     origin_player = api.get_player_origin(player_name=player_name, show_all_hits=True)
 except ALHTTPExceptionFromResponse as exception:
     print(exception)

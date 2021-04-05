@@ -24,7 +24,7 @@ def test_match_history(mock, match_history_get_response):
                   f"&player={player_name}" \
                   f"&history=1&action={action.value}"
     mock.register_uri('GET', history_url, json=match_history_get_response)
-    response = api.match_history(player_name=player_name, platform=platform, action=action)
+    response = api.events(player_name=player_name, platform=platform, action=action)
     assert response[0]['eventType'] == 'Session'
 
 
@@ -58,4 +58,4 @@ def test_get_player(
     response = api.get_player(name=player_name, platform=platform)
     assert isinstance(response, ALPlayer)
     assert response.global_info.name == player_name
-    assert response.match_history[0].action == 'leave'
+    assert response.events[0].action == 'leave'
