@@ -7,6 +7,7 @@ https://apexlegendsapi.com
 """
 import json
 import requests
+from deprecated import deprecated
 from .al_domain import ALPlayer  # noqa E0402
 from .al_base import ALPlatform, ALAction, ALHTTPExceptionFromResponse  # noqa E0402
 
@@ -89,6 +90,24 @@ class ApexLegendsAPI:
         """
         params: dict = {'platform': platform.value, 'player': player_name}
         return self.make_request(additional_params=params)
+
+    @deprecated(reason="use `events` instead")
+    def match_history(self, player_name: str, platform: ALPlatform, action: ALAction) -> list:
+        """
+        Query the server for the given player / platform and return a list of their
+        events
+
+        NOTE:
+          * Match history is only available for supporters
+          * Match history must be tracked by the server otherwise this will return nothing
+          * In order to add a player to be tracked, you need to call this passing 'add' action.
+
+        :param player_name: Player Name for match history
+        :param platform: see Platform enum for values
+        :param action: see Action enum for values
+        :return: List of history created from response json
+        """
+        return self.events(player_name=player_name, platform=platform, action=action)
 
     def events(self, player_name: str, platform: ALPlatform, action: ALAction) -> list:
         """

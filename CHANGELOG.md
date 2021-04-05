@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Added  
 - Added docstring comments for every single attribute and class so that they are more easily inspected
+- `events` api to replace `match_history`
+
+## Removed
+- Deprecated `match_history` api (in favor of `events`)
 
 ## [1.0.2]
 ### Added
