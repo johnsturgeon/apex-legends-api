@@ -37,7 +37,7 @@ jobs:
     - name: Lint with pylint
       run: |
         # lint the module, and the tests
-        pylint apex_legends_api tests
+        pylint --disable=unsubscriptable-object apex_legends_api tests
     - name: test
       run: |
         pip install pytest
