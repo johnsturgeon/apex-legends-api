@@ -15,13 +15,13 @@ class ApexLegendsAPI:
     """
     Main class that wraps the API at apex
     """
-    api_version = "5"
-    base_params = {'version': api_version}
-    base_url = "https://api.mozambiquehe.re/bridge"
+    api_version: str = "5"
+    base_params: dict = {'version': api_version}
+    base_url: str = "https://api.mozambiquehe.re/bridge"
 
     def __init__(self, api_key: str):
         """ Initialize with the API Key """
-        self.session = requests.Session()
+        self.session: requests.Session = requests.Session()
         self.session.headers.update({'Authorization': api_key})
 
     def make_request(self, additional_params: dict, new_base_url: str = None) -> list:
@@ -58,14 +58,14 @@ class ApexLegendsAPI:
         :return: a single player or None if no player is found
         :rtype: ALPlayer
         """
-        basic_player_stats = self.basic_player_stats(name, platform)
+        basic_player_stats: list = self.basic_player_stats(name, platform)
         assert len(basic_player_stats) == 1
         match_history_info: list = self.match_history(
             player_name=name,
             platform=platform,
             action=ALAction.INFO
         )
-        match_history = list()
+        match_history: list = list()
         tracked_player: dict
         for tracked_player in match_history_info[0].get('data'):
             if name == tracked_player.get('name') and \
@@ -87,7 +87,7 @@ class ApexLegendsAPI:
         :param platform: (see Platform enum for values)
         :return: List of player stats created from response json
         """
-        params = {'platform': platform.value, 'player': player_name}
+        params: dict = {'platform': platform.value, 'player': player_name}
         return self.make_request(additional_params=params)
 
     def match_history(self, player_name: str, platform: ALPlatform, action: ALAction) -> list:
@@ -105,7 +105,7 @@ class ApexLegendsAPI:
         :param action: see Action enum for values
         :return: List of history created from response json
         """
-        params = {
+        params: dict = {
             'platform': platform.value,
             'player': player_name,
             'history': 1,
@@ -121,7 +121,7 @@ class ApexLegendsAPI:
         :param show_all_hits: True to 'search' for player (show multiple hits), default False
         :return: list of results
         """
-        new_base_url = "https://api.mozambiquehe.re/origin?"
+        new_base_url: str = "https://api.mozambiquehe.re/origin?"
         new_base_url += f"&player={player_name}"
         if show_all_hits:
             new_base_url += "&showAllHits"
@@ -136,17 +136,18 @@ class ApexLegendsAPI:
         NOTE:
             This action cannot be undone, proceed only if you know what you are doing
         """
-        params = {'history': 1, 'action': 'info'}
-        response = self.make_request(additional_params=params)
-        player_list = response[0]['data']
-        num_players = len(player_list)
+        params: dict = {'history': 1, 'action': 'info'}
+        response: list = self.make_request(additional_params=params)
+        player_list: list = response[0]['data']
+        num_players: int = len(player_list)
+        player: dict
         for player in player_list:
-            platform = ALPlatform(player['platform'])
-            del_response = self.match_history(
+            platform: ALPlatform = ALPlatform(player['platform'])
+            del_response: list = self.match_history(
                 player_name=player['name'],
                 platform=platform,
                 action=ALAction.DELETE
             )
-            new_player_list = del_response[0]['data']
+            new_player_list: list = del_response[0]['data']
             num_players -= 1
             assert len(new_player_list) == num_players
