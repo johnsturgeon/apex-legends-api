@@ -5,13 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.1.0]
-### Changed
-- Renamed api for `match_history` to `events` to correctly reflect the fact
-  that it returns more than just history events.
-
 ## Added  
 - Added docstring comments for every single attribute and class so that they are more easily inspected
-- `events` api to replace `match_history`
+- Added `events` api (to replace `match_history`) - same signature, just different name to better reflect it's usage
 
 ## Removed
 - Deprecated `match_history` api (in favor of `events`)
