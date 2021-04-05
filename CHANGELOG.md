@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Renamed api for `match_history` to `events` to correctly reflect the fact
   that it returns more than just history events.
+
+## Added  
 - Added docstring comments for every single attribute and class so that they are more easily inspected
 
 ## [1.0.2]
