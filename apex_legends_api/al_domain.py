@@ -189,7 +189,7 @@ class DataTracker:
         self.tracker_rank = DataTracker.TrackerRank(tracker_rank_dict=rank_dict)
         """
         Rank of the stat for this legend
-        
+
         Note:
             * Values are -1 if they were not part of the API query
         """
