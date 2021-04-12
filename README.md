@@ -1,6 +1,8 @@
 # apex-legends-api
 Python wrapper for https://apexlegendsapi.com
 
+[![Downloads](https://pepy.tech/badge/apex-legends-api/week)](https://pepy.tech/project/apex-legends-api)
+
 # Installation
 You can install it from source, or pip (recommended)
 # Requirements

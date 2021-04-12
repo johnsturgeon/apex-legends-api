@@ -4,24 +4,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Added
+- Added PyPi download badge to README
+
+### Fixed
+- Fixed CHANGELOG headers for the last few releases
+
 ## [1.2.1]
-## Fixed
+### Fixed
 -  Fixed version info in `setup.py`
 -  Fixed release to publish correctly 
 
 ## [1.2.0]
-## Added
+### Added
 - Added support for new addition to the API for showing Legend Tracker stat ranking.
 - Added parameter to API calls (and player creation) to skip stat ranking (can speed up API request)
   * NOTE: `TrackerRank` will still be part of the legend's tracker, but the values will all be '-1'
 - New unit tests to support tracker rank
  
 ## [1.1.0]
-## Added  
+### Added  
 - Added docstring comments for every single attribute and class so that they are more easily inspected
 - Added `events` api (to replace `match_history`) - same signature, just different name to better reflect it's usage
 
-## Removed
+### Removed
 - Deprecated `match_history` api (in favor of `events`)
 
 ## [1.0.2]
