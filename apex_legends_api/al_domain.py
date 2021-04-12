@@ -160,7 +160,20 @@ class RealtimeInfo:
 
 
 class DataTracker:
-    """ data structure for badges """
+    """
+    Data structure for badges
+
+    Note:
+        if the tracker's rank is not available, and empty dictionary will be used
+    """
+    class TrackerRank:
+        """ Data structure for the rank for the stat being tracked """
+        def __init__(self, tracker_rank_dict: dict):
+            self.position: int = tracker_rank_dict.get('rankPos')
+            """ Position of rank """
+            self.percent: float = float(tracker_rank_dict.get('topPercent'))
+            """ Percentile of rank (lower number is better) """
+
     def __init__(self, data_trackers_dict: dict):
         self.name: str = data_trackers_dict.get('name')
         """ Descriptive name of the tracker """
@@ -168,6 +181,18 @@ class DataTracker:
         """ Numerical value of the tracker """
         self.key: str = data_trackers_dict.get('key')
         """ Unique 'key' for the tracker """
+        rank_dict: dict = data_trackers_dict.get('rank')
+        if not rank_dict:
+            rank_dict = {'rankPos': -1, 'topPercent': -1.0}
+        else:
+            rank_dict = data_trackers_dict.get('rank')
+        self.tracker_rank = DataTracker.TrackerRank(tracker_rank_dict=rank_dict)
+        """
+        Rank of the stat for this legend
+
+        Note:
+            * Values are -1 if they were not part of the API query
+        """
 
 
 class ImgAsset:
