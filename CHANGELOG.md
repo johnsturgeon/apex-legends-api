@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0]
+## Added
+- Added support for new addition to the API for showing Legend Tracker stat ranking.
+- Added parameter to API calls (and player creation) to skip stat ranking (can speed up API request)
+  * NOTE: `TrackerRank` will still be part of the legend's tracker, but the values will all be '-1'
+- New unit tests to support tracker rank
+ 
 ## [1.1.0]
 ## Added  
 - Added docstring comments for every single attribute and class so that they are more easily inspected

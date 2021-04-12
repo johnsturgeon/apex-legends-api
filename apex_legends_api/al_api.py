@@ -47,19 +47,19 @@ class ApexLegendsAPI:
             response_text = [response_text]
         return response_text
 
-    def get_player(self, name: str, platform: ALPlatform) -> ALPlayer:
+    def get_player(self, name: str, platform: ALPlatform, skip_tracker_rank=False) -> ALPlayer:
         """
-        Retrieve the ALPlayer object you can load all the data on init, or via
-        specific calls later.
+        Retrieve the ALPlayer object populated with data from the api.
 
         NOTE:
             Player must exist, method will return None if the player cannot be found
         :param name: Name of the player
         :param platform: see ALPlatform for all types
+        :param skip_tracker_rank: if set to True, this will skip fetching the legend ranks
         :return: a single player or None if no player is found
         :rtype: ALPlayer
         """
-        basic_player_stats: list = self.basic_player_stats(name, platform)
+        basic_player_stats: list = self.basic_player_stats(name, platform, skip_tracker_rank)
         assert len(basic_player_stats) == 1
         event_info: list = self.events(
             player_name=name,
@@ -78,7 +78,10 @@ class ApexLegendsAPI:
                 )
         return ALPlayer(basic_player_stats_data=basic_player_stats[0], events=events)
 
-    def basic_player_stats(self, player_name: str, platform: ALPlatform) -> list:
+    def basic_player_stats(
+            self, player_name: str,
+            platform: ALPlatform,
+            skip_tracker_rank=False) -> list:
         """
         Query the server for the given player / platform and returns a dictionary of their
         stats.
@@ -86,9 +89,12 @@ class ApexLegendsAPI:
         TODO: Make player_name a list since the API can accept multiple player names
         :param player_name: Player Name to search for
         :param platform: (see Platform enum for values)
+        :param skip_tracker_rank: if set to true, this will not fetch the legend's tracker rank
         :return: List of player stats created from response json
         """
         params: dict = {'platform': platform.value, 'player': player_name}
+        if skip_tracker_rank:
+            params.update({'skipRank': True})
         return self.make_request(additional_params=params)
 
     @deprecated(reason="use `events` instead")

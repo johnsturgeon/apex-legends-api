@@ -143,66 +143,18 @@
                 "data": [
                     {
                         "name": "Kills",
-                        "value": 1334,
-                        "key": "kills",
-                        "rank": {
-                            "rankPos": 15763,
-                            "topPercent": 2.56
-                        }
+                        "value": 79,
+                        "key": "kills"
                     },
                     {
-                        "name": "Damage",
-                        "value": 365023,
-                        "key": "damage",
-                        "rank": {
-                            "rankPos": 9845,
-                            "topPercent": 15.29
-                        }
+                        "name": "Season 8 kills",
+                        "value": 30,
+                        "key": "kills_season_8"
                     },
                     {
-                        "name": "Games played",
-                        "value": 509,
-                        "key": "games_played",
-                        "rank": {
-                            "rankPos": 2078,
-                            "topPercent": 18.59
-                        }
-                    },
-                    {
-                        "name": "Top 3",
-                        "value": 122,
-                        "key": "top_3",
-                        "rank": {
-                            "rankPos": 1126,
-                            "topPercent": 12.04
-                        }
-                    },
-                    {
-                        "name": "Care items for mates",
-                        "value": 328,
-                        "key": "dropped_items_for_squadmates",
-                        "rank": {
-                            "rankPos": 2752,
-                            "topPercent": 12.65
-                        }
-                    },
-                    {
-                        "name": "Season 2 Wins",
-                        "value": 3,
-                        "key": "wins_season_2",
-                        "rank": {
-                            "rankPos": 6064,
-                            "topPercent": 41.89
-                        }
-                    },
-                    {
-                        "name": "Season 4 Wins",
-                        "value": 7,
-                        "key": "wins_season_4",
-                        "rank": {
-                            "rankPos": 5892,
-                            "topPercent": 25.18
-                        }
+                        "name": "Season 8 wins",
+                        "value": 0,
+                        "key": "wins_season_8"
                     }
                 ],
                 "ImgAssets": {
