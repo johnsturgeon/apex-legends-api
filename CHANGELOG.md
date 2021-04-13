@@ -4,9 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.3.0]
 ### Added
 - Added PyPi download badge to README
+- Added support for Account level badges
+- Added new unit tests for badges
+
+### Changed
+- Got rid of class `SelectedLegend` and now just use `Legend` for all legends
 
 ### Fixed
 - Fixed CHANGELOG headers for the last few releases
