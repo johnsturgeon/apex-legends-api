@@ -6,6 +6,51 @@ from .al_base import ALEventType, ALPlatform  # noqa E0402
 
 
 # pylint: disable=too-few-public-methods
+class GameInfo:
+    """
+    Data structure for game information for selected legend
+
+    Example:
+        - skin=Extreme Measures
+        - frame=Fuel Injected
+        - pose=Spin and Flick
+        - intro=Run fast, hit fast, win fast
+    """
+    class Badge:
+        """ data structure for badges """
+        def __init__(self, badge_dict: dict):
+            self.name: str = badge_dict.get('name')
+            """ Name of the badge """
+            self.value: str = badge_dict.get('value')
+            """ Value of the badge """
+            if badge_dict.get('category'):
+                self.category: str = badge_dict.get('category')
+                """
+                Category of the badge
+
+                Note:
+                    - This is either 'Account Badges' for account level badge, or the legend name
+                """
+
+    def __init__(self, game_info_dict: dict):
+        if game_info_dict.get('skin'):
+            self.skin: str = game_info_dict.get('skin')
+            """ Skin on the current legend """
+        if game_info_dict.get('frame'):
+            self.frame: str = game_info_dict.get('frame')
+            """ Frame chosen for the current legend """
+        if game_info_dict.get('pose'):
+            self.pose: str = game_info_dict.get('pose')
+            """ Pose of the current legend """
+        if game_info_dict.get('intro'):
+            self.intro: str = game_info_dict.get('intro')
+            """ Intro quip of the current legend """
+        self.badges: list[GameInfo.Badge] = list()
+        """ Currently selected 'badges' for the current legend """
+        for badge in game_info_dict.get('badges'):
+            self.badges.append(GameInfo.Badge(badge))
+
+
 class Event:
     """ Parent class for apex-legend events """
     def __init__(self, event_dict: dict):
@@ -140,6 +185,10 @@ class GlobalInfo:
         """ Active / latest ban data """
         self.rank: GlobalInfo.Rank = GlobalInfo.Rank(rank_dict=global_dict.get('rank'))
         """ Current rank detail """
+        self.badges: list[GameInfo.Badge] = list()
+        if global_dict.get('badges'):
+            for badge in global_dict.get('badges'):
+                self.badges.append(GameInfo.Badge(badge_dict=badge))
 
 
 class RealtimeInfo:
@@ -204,57 +253,8 @@ class ImgAsset:
         """ URL to the banner of the image """
 
 
-class SelectedLegend:
-    """ a data structure for the player's selected legend """
-    class GameInfo:
-        """
-        Data structure for game information for selected legend
-
-        Example:
-            - skin=Extreme Measures
-            - frame=Fuel Injected
-            - pose=Spin and Flick
-            - intro=Run fast, hit fast, win fast
-        """
-        class Badge:
-            """ data structure for badges """
-            def __init__(self, badge_dict: dict):
-                self.name: str = badge_dict.get('name')
-                """ Name of the badge """
-                self.value: str = badge_dict.get('value')
-                """ Value of the badge """
-
-        def __init__(self, game_info_dict: dict):
-            self.skin: str = game_info_dict.get('skin')
-            """ Skin on the current legend """
-            self.frame: str = game_info_dict.get('frame')
-            """ Frame chosen for the current legend """
-            self.pose: str = game_info_dict.get('pose')
-            """ Pose of the current legend """
-            self.intro: str = game_info_dict.get('intro')
-            """ Intro quip of the current legend """
-            self.badges: list[SelectedLegend.GameInfo.Badge] = list()
-            """ Currently selected 'badges' for the current legend """
-            for badge in game_info_dict.get('badges'):
-                self.badges.append(SelectedLegend.GameInfo.Badge(badge))
-
-    def __init__(self, selected_legend_dict: dict):
-        self.legend_name: str = selected_legend_dict.get('LegendName')
-        """ Name of the selected legend (Bloodhound, Rampart, etc...) """
-        self.data_trackers: list[DataTracker] = list()
-        """ Up to three data trackers currently active on the legend """
-        data_tracker: dict
-        for data_tracker in selected_legend_dict.get('data'):
-            self.data_trackers.append(DataTracker(data_tracker))
-        self.game_info: SelectedLegend.GameInfo = SelectedLegend.GameInfo(
-            selected_legend_dict.get('gameInfo')
-        )
-        """ GameInfo for the selected legend """
-        self.img_assets: ImgAsset = ImgAsset(selected_legend_dict.get('ImgAssets'))
-
-
 class Legend:
-    """ data structure for NON selected legend """
+    """ data structure for a player's legend legend """
     def __init__(self, legend_name: str, legend_dict: dict):
         self.name: str = legend_name
         """ Legend name """
@@ -266,6 +266,9 @@ class Legend:
                 self.data_trackers.append(DataTracker(data_tracker))
         self.img_assets: ImgAsset = ImgAsset(legend_dict.get('ImgAssets'))
         """ urls to icons / banner images"""
+        if legend_dict.get('gameInfo'):
+            self.game_info: GameInfo = GameInfo(legend_dict.get('gameInfo'))
+            """ GameInfo for the legend """
 
 
 class ALPlayer:
@@ -287,10 +290,11 @@ class ALPlayer:
         """ Contains the RealtimeInfo for the player """
         self.timestamp_last_checked: int = arrow.utcnow().int_timestamp
         """ Contains the timestamp that the player was created / data loaded """
-        self.selected_legend: SelectedLegend = SelectedLegend(
-            selected_legend_dict=basic_player_stats_data['legends']['selected']
+        self.selected_legend: Legend = Legend(
+            legend_name=basic_player_stats_data['legends']['selected']['LegendName'],
+            legend_dict=basic_player_stats_data['legends']['selected']
         )
-        """ Info about the current SelectedLegend """
+        """ Currently Selected Legend """
         self.all_legends: list[Legend] = list()
         """ List of all legends (and their stats) """
         for legend_name, legend_dict in basic_player_stats_data['legends']['all'].items():

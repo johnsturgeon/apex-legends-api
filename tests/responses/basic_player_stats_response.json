@@ -17,7 +17,7 @@
             "rankName": "Gold",
             "rankDiv": 4,
             "ladderPos": -1,
-            "rankImg": "https:\/\/api.mozambiquehe.re\/assets\/ranks\/gold4.png",
+            "rankImg": "https://api.mozambiquehe.re/assets/ranks/gold4.png",
             "rankedSeason": "season08_split_2"
         },
         "battlepass": {
@@ -32,7 +32,13 @@
                 "season7": -1,
                 "season8": -1
             }
-        }
+        },
+        "badges": [
+            {
+                "name": "Chaos Theory Master",
+                "value": 0
+            }
+        ]
     },
     "realtime": {
         "lobbyState": "open",
@@ -69,22 +75,25 @@
                 "intro": "None",
                 "badges": [
                     {
-                        "name": "Account Level",
-                        "value": 192
+                        "name": "Chaos Theory Master",
+                        "value": 0,
+                        "category": "Account Badges"
                     },
                     {
-                        "name": "Gibraltar's Wrath",
-                        "value": 0
+                        "name": "Venomous",
+                        "value": 0,
+                        "category": "Octane"
                     },
                     {
-                        "name": "Black Lives Matter",
-                        "value": 0
+                        "name": "Mayhem Level: Season 8",
+                        "value": 113,
+                        "category": "Account Badges"
                     }
                 ]
             },
             "ImgAssets": {
-                "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/gibraltar.png",
-                "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/gibraltar.jpg"
+                "icon": "https://api.mozambiquehe.re/assets/icons/gibraltar.png",
+                "banner": "https://api.mozambiquehe.re/assets/banners/gibraltar.jpg"
             }
         },
         "all": {
@@ -107,8 +116,8 @@
                     }
                 ],
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/bangalore.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/bangalore.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/bangalore.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/bangalore.jpg"
                 }
             },
             "Bloodhound": {
@@ -135,8 +144,8 @@
                     }
                 ],
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/bloodhound.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/bloodhound.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/bloodhound.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/bloodhound.jpg"
                 }
             },
             "Lifeline": {
@@ -206,8 +215,8 @@
                     }
                 ],
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/lifeline.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/lifeline.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/lifeline.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/lifeline.jpg"
                 }
             },
             "Caustic": {
@@ -219,8 +228,8 @@
                     }
                 ],
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/caustic.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/caustic.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/caustic.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/caustic.jpg"
                 }
             },
             "Gibraltar": {
@@ -247,14 +256,14 @@
                     }
                 ],
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/gibraltar.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/gibraltar.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/gibraltar.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/gibraltar.jpg"
                 }
             },
             "Mirage": {
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/mirage.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/mirage.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/mirage.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/mirage.jpg"
                 }
             },
             "Pathfinder": {
@@ -276,8 +285,8 @@
                     }
                 ],
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/pathfinder.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/pathfinder.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/pathfinder.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/pathfinder.jpg"
                 }
             },
             "Wraith": {
@@ -299,11 +308,19 @@
                     }
                 ],
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/wraith.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/wraith.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/wraith.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/wraith.jpg"
                 }
             },
             "Octane": {
+                "gameInfo": {
+                    "badges": [
+                        {
+                            "name": "Venomous",
+                            "value": 0
+                        }
+                    ]
+                },
                 "data": [
                     {
                         "name": "Kills",
@@ -322,8 +339,8 @@
                     }
                 ],
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/octane.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/octane.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/octane.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/octane.jpg"
                 }
             },
             "Wattson": {
@@ -335,8 +352,8 @@
                     }
                 ],
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/wattson.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/wattson.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/wattson.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/wattson.jpg"
                 }
             },
             "Crypto": {
@@ -353,8 +370,8 @@
                     }
                 ],
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/crypto.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/crypto.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/crypto.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/crypto.jpg"
                 }
             },
             "Revenant": {
@@ -376,8 +393,8 @@
                     }
                 ],
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/revenant.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/revenant.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/revenant.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/revenant.jpg"
                 }
             },
             "Loba": {
@@ -394,14 +411,14 @@
                     }
                 ],
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/loba.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/loba.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/loba.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/loba.jpg"
                 }
             },
             "Rampart": {
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/rampart.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/rampart.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/rampart.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/rampart.jpg"
                 }
             },
             "Horizon": {
@@ -428,8 +445,8 @@
                     }
                 ],
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/horizon.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/horizon.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/horizon.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/horizon.jpg"
                 }
             },
             "Fuse": {
@@ -451,8 +468,8 @@
                     }
                 ],
                 "ImgAssets": {
-                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/fuse.png",
-                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/fuse.jpg"
+                    "icon": "https://api.mozambiquehe.re/assets/icons/fuse.png",
+                    "banner": "https://api.mozambiquehe.re/assets/banners/fuse.jpg"
                 }
             }
         }

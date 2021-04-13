@@ -32,6 +32,12 @@ def basic_player_stats_skip_rank_response():
 
 
 @pytest.fixture()
+def basic_player_stats_no_badges_response():
+    with open(get_full_filepath('basic_player_stats_no_badges_response.json')) as json_file:
+        yield json.load(json_file)
+
+
+@pytest.fixture()
 def match_history_get_response():
     with open(get_full_filepath('match_history_get_response.json')) as json_file:
         yield json.load(json_file)

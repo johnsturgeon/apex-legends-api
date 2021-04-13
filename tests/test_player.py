@@ -1,6 +1,6 @@
 """ unit tests for the player class """
-from apex_legends_api import ApexLegendsAPI, ALAction, ALPlatform, ALPlayer
-from apex_legends_api.al_domain import DataTracker, Legend
+from apex_legends_api import ApexLegendsAPI, ALAction, ALPlatform, ALPlayer  # noqa F0401
+from apex_legends_api.al_domain import DataTracker, Legend, GameInfo  # noqa F0401
 
 api = ApexLegendsAPI(api_key='api_key')
 BASE_URL = ApexLegendsAPI.base_url
@@ -51,17 +51,14 @@ def test_get_player_origin(mock, player_origin_response):
     assert response[0]['name'] == player_name
 
 
-def test_get_player(
+def test_get_al_player(
         mock,
         basic_player_stats_response,
         match_history_get_response,
         match_history_info_response
 ):
-    response: ALPlayer = helper_get_player(
-        mock,
-        basic_player_stats_response,
-        match_history_get_response,
-        match_history_info_response
+    response: ALPlayer = helper_get_al_player(
+        mock, basic_player_stats_response, match_history_get_response, match_history_info_response
     )
     assert isinstance(response, ALPlayer)
     assert response.global_info.name == "Player"
@@ -80,18 +77,15 @@ def test_get_rank(
     assert response[0]['legends']['all']['Lifeline']['data'][0]['rank']['rankPos'] == 15763
 
 
-def test_player_rank(
+def test_al_player_rank(
         mock,
         basic_player_stats_skip_rank_response,
         basic_player_stats_response,
         match_history_get_response,
         match_history_info_response
 ):
-    player: ALPlayer = helper_get_player(
-        mock,
-        basic_player_stats_response,
-        match_history_get_response,
-        match_history_info_response
+    player: ALPlayer = helper_get_al_player(
+        mock, basic_player_stats_response, match_history_get_response, match_history_info_response
     )
     assert len(player.all_legends) > 0
     legend: Legend
@@ -100,7 +94,7 @@ def test_player_rank(
             tracker: DataTracker = legend.data_trackers[0]
             assert tracker.tracker_rank.position == 15763
 
-    no_rank_player: ALPlayer = helper_get_player(
+    no_rank_player: ALPlayer = helper_get_al_player(
         mock,
         basic_player_stats_skip_rank_response,
         match_history_get_response,
@@ -114,7 +108,74 @@ def test_player_rank(
             assert tracker.tracker_rank.position == -1
 
 
-def helper_get_player(
+def test_player_response_badges_exists(
+        mock,
+        basic_player_stats_response
+):
+    player_name = "Player"
+    platform = ALPlatform.PC
+    player_url = f"{BASE_URL}?version={VERSION}&platform={platform.value}&player={player_name}"
+    mock.register_uri('GET', player_url, json=basic_player_stats_response)
+    response = api.basic_player_stats(player_name=player_name, platform=platform)
+    assert 'badges' in response[0]['global']
+    assert response[0]['global']['badges'][0]['name'] == "Chaos Theory Master"
+
+
+def test_player_response_no_badges(
+        mock,
+        basic_player_stats_no_badges_response
+):
+    player_name = "Player"
+    platform = ALPlatform.PC
+    player_url = f"{BASE_URL}?version={VERSION}&platform={platform.value}&player={player_name}"
+    mock.register_uri('GET', player_url, json=basic_player_stats_no_badges_response)
+    response = api.basic_player_stats(player_name=player_name, platform=platform)
+    assert 'badges' not in response[0]['global']
+
+
+def test_al_player_badges_exist(
+        mock,
+        basic_player_stats_response,
+        match_history_get_response,
+        match_history_info_response
+):
+    response: ALPlayer = helper_get_al_player(
+        mock, basic_player_stats_response, match_history_get_response, match_history_info_response
+    )
+    assert isinstance(response, ALPlayer)
+    assert hasattr(response.global_info, 'badges')
+    assert response.global_info.badges[0].name == "Chaos Theory Master"
+
+
+def test_al_player_selected_legend_badge_category(
+        mock,
+        basic_player_stats_response,
+        match_history_get_response,
+        match_history_info_response
+):
+    response: ALPlayer = helper_get_al_player(
+        mock, basic_player_stats_response, match_history_get_response, match_history_info_response
+    )
+    assert isinstance(response, ALPlayer)
+    # First let's confirm that the account badge is set for the selected legend
+    assert hasattr(response.selected_legend.game_info, 'badges')
+    game_info: GameInfo = response.selected_legend.game_info
+    assert len(game_info.badges) > 0
+    assert game_info.badges[0].category == 'Account Badges'
+
+    # Now let's confirm that the 'global' category does not exist
+    assert len(response.global_info.badges) > 0
+    assert not hasattr(response.global_info.badges[0], 'category')
+
+    assert len(response.all_legends) > 0
+    legend: Legend
+    for legend in response.all_legends:
+        if legend.name == 'Octane':
+            assert len(legend.game_info.badges) > 0
+            assert not hasattr(legend.game_info.badges[0], 'category')
+
+
+def helper_get_al_player(
         mock,
         basic_player_stats_response,
         match_history_get_response,
