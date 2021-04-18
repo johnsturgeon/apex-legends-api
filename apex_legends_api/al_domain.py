@@ -235,7 +235,7 @@ class DataTracker:
         Aggregate key for combining 'specialEvent' data with regular data
 
         Note:
-            Special Event data is the same as regular but has a different key for 
+            Special Event data is the same as regular but has a different key for
             statistical purposes it makes sense to just drop the 'specialEvent' prefix.
         """
         rank_dict: dict = data_trackers_dict.get('rank')
