@@ -231,9 +231,9 @@ class DataTracker:
         self.key: str = data_trackers_dict.get('key')
         """ Unique 'key' for the tracker """
         self.category: str = self.key.strip('specialEvent_')
-        """ 
+        """
         Aggregate key for combining 'specialEvent' data with regular data
-        
+
         Note:
             Special Event data is the same as regular but has a different key for 
             statistical purposes it makes sense to just drop the 'specialEvent' prefix.
