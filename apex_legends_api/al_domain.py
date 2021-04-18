@@ -230,7 +230,7 @@ class DataTracker:
         """ Numerical value of the tracker """
         self.key: str = data_trackers_dict.get('key')
         """ Unique 'key' for the tracker """
-        self.category: str = self.key.strip('specialEvent_')
+        self.category: str = self.key.lstrip('specialEvent_')
         """
         Aggregate key for combining 'specialEvent' data with regular data
 
