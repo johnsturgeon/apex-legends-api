@@ -230,6 +230,14 @@ class DataTracker:
         """ Numerical value of the tracker """
         self.key: str = data_trackers_dict.get('key')
         """ Unique 'key' for the tracker """
+        self.category: str = self.key.strip('specialEvent_')
+        """ 
+        Aggregate key for combining 'specialEvent' data with regular data
+        
+        Note:
+            Special Event data is the same as regular but has a different key for 
+            statistical purposes it makes sense to just drop the 'specialEvent' prefix.
+        """
         rank_dict: dict = data_trackers_dict.get('rank')
         if not rank_dict:
             rank_dict = {'rankPos': -1, 'topPercent': -1.0}
