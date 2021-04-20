@@ -231,8 +231,6 @@ class DataTracker:
         self.key: str = data_trackers_dict.get('key')
         """ Unique 'key' for the tracker """
         self.category: str = self.key.lstrip('specialEvent_')
-        if self.category.startswith('wins_'):
-            self.category = 'wins'
         """
         Aggregate key for combining 'specialEvent' and 'season' data with regular data
 
@@ -241,6 +239,8 @@ class DataTracker:
             statistical purposes it makes sense to just drop the 'specialEvent' prefix
             or any 'season' suffix
         """
+        if self.category.startswith('wins_'):
+            self.category = 'wins'
         rank_dict: dict = data_trackers_dict.get('rank')
         if not rank_dict:
             rank_dict = {'rankPos': -1, 'topPercent': -1.0}
