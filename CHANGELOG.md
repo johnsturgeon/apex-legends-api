@@ -4,13 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.3]
+### Fixed
+- Fixed the `category` to combine wins for seasons into a 'wins' category
+
 ## [1.3.2]
 ### EMERGENCY FIX
 - Fixed category to use 'lstrip' instead of 'strip' because it chopped off the wrong thing
 
 ## [1.3.1]
 ### Added
-- Added new property `category` to `DataTracker` which strips the 'specialEvent_' from the key. 
+- Added new property `category` to `DataTracker` which strips the 'specialEvent_' from the key.
   The result is that `damage` and `specialEvent_damage` are treated as the same category
 
 ## [1.3.0]
@@ -28,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.2.1]
 ### Fixed
 -  Fixed version info in `setup.py`
--  Fixed release to publish correctly 
+-  Fixed release to publish correctly
 
 ## [1.2.0]
 ### Added
@@ -36,9 +40,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added parameter to API calls (and player creation) to skip stat ranking (can speed up API request)
   * NOTE: `TrackerRank` will still be part of the legend's tracker, but the values will all be '-1'
 - New unit tests to support tracker rank
- 
+
 ## [1.1.0]
-### Added  
+### Added
 - Added docstring comments for every single attribute and class so that they are more easily inspected
 - Added `events` api (to replace `match_history`) - same signature, just different name to better reflect it's usage
 
@@ -78,10 +82,10 @@ can now be done through the `ALPlayer` class.  See the README.md for usage.
 ## [0.3.0]
 ### Changed
 - Re-arranged module files and imports
-   - `al_base` is where utility / base classes will go that are shared across modules
-   - `al_api` is the core API interface class
-   - `al_domain` is the module that will contain all of the 'domain' based 
-     classes such as `ALPlayer` (eventually 'matches', etc...)
+  - `al_base` is where utility / base classes will go that are shared across modules
+  - `al_api` is the core API interface class
+  - `al_domain` is the module that will contain all of the 'domain' based
+    classes such as `ALPlayer` (eventually 'matches', etc...)
 - Class renames (which will change the API).  Now all classes are prefixed with `AL` (Apex Legends)
 - Updated README.md to reflect the changes
 
@@ -92,7 +96,7 @@ can now be done through the `ALPlayer` class.  See the README.md for usage.
 ## [0.2.1]
 ### Changed
 - the module is now exporting all the classes through the `__init__.py` which will make importing
-simpler
+  simpler
 - Moved `ApexLegendsAPI` class to its own file
 
 ## Fixed
