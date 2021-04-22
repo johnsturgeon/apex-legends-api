@@ -241,6 +241,8 @@ class DataTracker:
         """
         if self.category.startswith('wins_'):
             self.category = 'wins'
+        if self.category.startswith('kills_'):
+            self.category = 'kills'
         rank_dict: dict = data_trackers_dict.get('rank')
         if not rank_dict:
             rank_dict = {'rankPos': -1, 'topPercent': -1.0}
