@@ -224,4 +224,3 @@ class ApexLegendsAPI:
         if show_all_hits:
             new_base_url += "&showAllHits"
         return self.make_request(new_base_url=new_base_url, additional_params={})
-
