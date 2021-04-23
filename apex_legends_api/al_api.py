@@ -78,6 +78,39 @@ class ApexLegendsAPI:
                 )
         return ALPlayer(basic_player_stats_data=basic_player_stats[0], events=events)
 
+    def get_player_by_uid(
+            self, uid: str, platform: ALPlatform, skip_tracker_rank=False
+    ) -> ALPlayer:
+        """
+        Retrieve the ALPlayer object populated with data from the api.
+
+        NOTE:
+            Player must exist, method will return None if the player cannot be found
+        :param uid: UID of the player
+        :param platform: see ALPlatform for all types
+        :param skip_tracker_rank: if set to True, this will skip fetching the legend ranks
+        :return: a single player or None if no player is found
+        :rtype: ALPlayer
+        """
+        basic_player_stats: list = self.basic_player_stats_by_uid(uid, platform, skip_tracker_rank)
+        assert len(basic_player_stats) == 1
+        event_info: list = self.events_by_uid(
+            uid=uid,
+            platform=platform,
+            action=ALAction.INFO
+        )
+        events: list = list()
+        tracked_player: dict
+        for tracked_player in event_info[0].get('data'):
+            if uid == tracked_player.get('uid') and \
+                    platform.value == tracked_player.get('platform'):
+                events = self.events_by_uid(
+                    uid=uid,
+                    platform=platform,
+                    action=ALAction.GET
+                )
+        return ALPlayer(basic_player_stats_data=basic_player_stats[0], events=events)
+
     def basic_player_stats(
             self, player_name: str,
             platform: ALPlatform,
@@ -86,13 +119,30 @@ class ApexLegendsAPI:
         Query the server for the given player / platform and returns a dictionary of their
         stats.
         More here: https://apexlegendsapi.com/#basic
-        TODO: Make player_name a list since the API can accept multiple player names
         :param player_name: Player Name to search for
         :param platform: (see Platform enum for values)
         :param skip_tracker_rank: if set to true, this will not fetch the legend's tracker rank
         :return: List of player stats created from response json
         """
         params: dict = {'platform': platform.value, 'player': player_name}
+        if skip_tracker_rank:
+            params.update({'skipRank': True})
+        return self.make_request(additional_params=params)
+
+    def basic_player_stats_by_uid(
+            self, uid: str,
+            platform: ALPlatform,
+            skip_tracker_rank=False) -> list:
+        """
+        Query the server for the given player / platform and returns a dictionary of their
+        stats.
+        More here: https://apexlegendsapi.com/#basic
+        :param uid: Player UID to search for
+        :param platform: (see Platform enum for values)
+        :param skip_tracker_rank: if set to true, this will not fetch the legend's tracker rank
+        :return: List of player stats created from response json
+        """
+        params: dict = {'platform': platform.value, 'uid': uid}
         if skip_tracker_rank:
             params.update({'skipRank': True})
         return self.make_request(additional_params=params)
@@ -138,6 +188,29 @@ class ApexLegendsAPI:
         }
         return self.make_request(additional_params=params)
 
+    def events_by_uid(self, uid: str, platform: ALPlatform, action: ALAction) -> list:
+        """
+        Query the server for the given player's UID / platform and return a list of their
+        events
+
+        NOTE:
+          * Match history is only available for supporters
+          * Match history must be tracked by the server otherwise this will return nothing
+          * In order to add a player to be tracked, you need to call this passing 'add' action.
+
+        :param uid: Player UID for match history
+        :param platform: see Platform enum for values
+        :param action: see Action enum for values
+        :return: List of history created from response json
+        """
+        params: dict = {
+            'platform': platform.value,
+            'uid': uid,
+            'history': 1,
+            'action': action.value
+        }
+        return self.make_request(additional_params=params)
+
     def get_player_origin(self, player_name: str, show_all_hits: bool = False) -> list:
         """
         Query the server for the origin user
@@ -152,27 +225,3 @@ class ApexLegendsAPI:
             new_base_url += "&showAllHits"
         return self.make_request(new_base_url=new_base_url, additional_params={})
 
-    def delete_all_tracked_players(self):
-        """
-        This will retrieve a list of all tracked players,
-        and call the 'delete' api for each of them.
-        Use with caution!
-
-        NOTE:
-            This action cannot be undone, proceed only if you know what you are doing
-        """
-        params: dict = {'history': 1, 'action': 'info'}
-        response: list = self.make_request(additional_params=params)
-        player_list: list = response[0]['data']
-        num_players: int = len(player_list)
-        player: dict
-        for player in player_list:
-            platform: ALPlatform = ALPlatform(player['platform'])
-            del_response: list = self.events(
-                player_name=player['name'],
-                platform=platform,
-                action=ALAction.DELETE
-            )
-            new_player_list: list = del_response[0]['data']
-            num_players -= 1
-            assert len(new_player_list) == num_players

@@ -4,6 +4,10 @@
     {
       "name": "Player",
       "platform": "PC"
+    },
+    {
+      "uid": "0000000000000",
+      "platform": "PC"
     }
   ]
 }

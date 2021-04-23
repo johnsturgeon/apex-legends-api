@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0]
+### Added
+- Added api versions for querying users by UID as well as by Name
+- Added api for getting a ALPlayer by UID as well.
+
+### Changed
+- Updated README to reflect a call by UID
+
+### Removed
+- Removed the api for deleting all tracked players
+
 ## [1.3.4]
 - Fixed the `category` to combine kills for seasons into a `kills` category
 

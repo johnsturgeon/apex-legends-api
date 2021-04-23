@@ -17,6 +17,15 @@ def test_basic_player_stats(mock, basic_player_stats_response):
     assert response[0]['global']['name'] == player_name
 
 
+def test_basic_player_stats_by_uid(mock, basic_player_stats_response):
+    player_uid = "0000000000000"
+    platform = ALPlatform.PC
+    player_url = f"{BASE_URL}?version={VERSION}&platform={platform.value}&uid={player_uid}"
+    mock.register_uri('GET', player_url, json=basic_player_stats_response)
+    response = api.basic_player_stats_by_uid(uid=player_uid, platform=platform)
+    assert response[0]['global']['uid'] == player_uid
+
+
 def test_basic_player_stats_skip_rank(mock, basic_player_stats_skip_rank_response):
     player_name = "Player"
     platform = ALPlatform.PC
@@ -41,6 +50,20 @@ def test_match_history(mock, match_history_get_response):
     mock.register_uri('GET', history_url, json=match_history_get_response)
     response = api.events(player_name=player_name, platform=platform, action=action)
     assert response[0]['eventType'] == 'Session'
+    assert response[0]['player'] == player_name
+
+
+def test_match_history_by_uid(mock, match_history_get_response):
+    uid = "0000000000000"
+    platform = ALPlatform.PC
+    action = ALAction.GET
+    history_url = f"{BASE_URL}?version={VERSION}&platform={platform.value}" \
+                  f"&uid={uid}" \
+                  f"&history=1&action={action.value}"
+    mock.register_uri('GET', history_url, json=match_history_get_response)
+    response = api.events_by_uid(uid=uid, platform=platform, action=action)
+    assert response[0]['eventType'] == 'Session'
+    assert response[0]['uid'] == uid
 
 
 def test_get_player_origin(mock, player_origin_response):
@@ -58,6 +81,20 @@ def test_get_al_player(
         match_history_info_response
 ):
     response: ALPlayer = helper_get_al_player(
+        mock, basic_player_stats_response, match_history_get_response, match_history_info_response
+    )
+    assert isinstance(response, ALPlayer)
+    assert response.global_info.name == "Player"
+    assert response.events[0].action == 'leave'
+
+
+def test_get_al_player_by_uid(
+        mock,
+        basic_player_stats_response,
+        match_history_get_response,
+        match_history_info_response
+):
+    response: ALPlayer = helper_get_al_player_by_uid(
         mock, basic_player_stats_response, match_history_get_response, match_history_info_response
     )
     assert isinstance(response, ALPlayer)
@@ -197,3 +234,27 @@ def helper_get_al_player(
     mock.register_uri('GET', history_get_url, json=match_history_get_response)
     mock.register_uri('GET', history_info_url, json=match_history_info_response)
     return api.get_player(name=player_name, platform=platform, skip_tracker_rank=skip_rank)
+
+
+def helper_get_al_player_by_uid(
+        mock,
+        basic_player_stats_response,
+        match_history_get_response,
+        match_history_info_response,
+        skip_rank=False
+) -> ALPlayer:
+    player_uid = "0000000000000"
+    platform = ALPlatform.PC
+    base_url_version = f"{BASE_URL}?version={VERSION}"
+    player_url = base_url_version + f"&platform={platform.value}&uid={player_uid}"
+    history_get_url = base_url_version + f"&platform={platform.value}" \
+                                         f"&uid={player_uid}" \
+                                         f"&history=1&action=GET"
+    history_info_url = base_url_version + f"&platform={platform.value}" \
+                                          f"&uid={player_uid}" \
+                                          f"&history=1&action=INFO"
+
+    mock.register_uri('GET', player_url, json=basic_player_stats_response)
+    mock.register_uri('GET', history_get_url, json=match_history_get_response)
+    mock.register_uri('GET', history_info_url, json=match_history_info_response)
+    return api.get_player_by_uid(uid=player_uid, platform=platform, skip_tracker_rank=skip_rank)
