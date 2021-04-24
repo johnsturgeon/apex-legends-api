@@ -59,5 +59,6 @@ print_description(player)
 
 ```
 ## Notes
+- See detailed documentation at [ReadTheDocs](https://apex-legends-api.readthedocs.io/en/latest/index.html)
 - See https://apexlegendsapi.com for complete documentation.
 - See [CHANGELOG.md](https://github.com/johnsturgeon/apex-legends-api/blob/main/CHANGELOG.md) for history of changes
