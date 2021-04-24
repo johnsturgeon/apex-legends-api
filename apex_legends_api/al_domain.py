@@ -1,6 +1,7 @@
 """
 Player class for the Apex Legends API Python package
 """
+from typing import List
 import arrow
 from .al_base import ALEventType, ALPlatform  # noqa E0402
 
@@ -290,7 +291,6 @@ class ALPlayer:
 
     Discussion:
         The player class is intended as an encapsulated representation of the data from the api.
-        To populate the values, there are convenience methods on the ApexLegendsAPI class
     """
 
     def __init__(self, basic_player_stats_data: dict, events: list = None):
@@ -302,17 +302,17 @@ class ALPlayer:
         )
         """ Contains the RealtimeInfo for the player """
         self.timestamp_last_checked: int = arrow.utcnow().int_timestamp
-        """ Contains the timestamp that the player was created / data loaded """
+        """ Contains the timestamp (UTC) that the player was created / data loaded """
         self.selected_legend: Legend = Legend(
             legend_name=basic_player_stats_data['legends']['selected']['LegendName'],
             legend_dict=basic_player_stats_data['legends']['selected']
         )
         """ Currently Selected Legend """
-        self.all_legends: list[Legend] = list()
+        self.all_legends: List[Legend] = list()
         """ List of all legends (and their stats) """
         for legend_name, legend_dict in basic_player_stats_data['legends']['all'].items():
             self.all_legends.append(Legend(legend_name=legend_name, legend_dict=legend_dict))
-        self.events: list = list()
+        self.events: List[Event] = list()
         """ List of all matches / events"""
         if events:
             event: dict

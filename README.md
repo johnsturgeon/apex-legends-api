@@ -5,10 +5,13 @@ Python wrapper for https://apexlegendsapi.com
 
 # Installation
 You can install it from source, or pip (recommended)
+
 # Requirements
 `python >= 3.6`
+
 ### Source installation
 `python ./setup.py install`
+
 ### Pip installation
 `pip install apex-legends-api`
 
@@ -56,5 +59,6 @@ print_description(player)
 
 ```
 ## Notes
+- See detailed documentation at [ReadTheDocs](https://apex-legends-api.readthedocs.io/en/latest/index.html)
 - See https://apexlegendsapi.com for complete documentation.
-- See [CHANGELOG.md](CHANGELOG.md) for history of changes
+- See [CHANGELOG.md](https://github.com/johnsturgeon/apex-legends-api/blob/main/CHANGELOG.md) for history of changes
