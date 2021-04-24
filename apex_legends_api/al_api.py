@@ -53,11 +53,11 @@ class ApexLegendsAPI:
 
         NOTE:
             Player must exist, method will return None if the player cannot be found
-        :param name: Name of the player
-        :param platform: see ALPlatform for all types
-        :param skip_tracker_rank: if set to True, this will skip fetching the legend ranks
+
+        :parameter name: Name of the player
+        :parameter platform: see ALPlatform for all types
+        :parameter skip_tracker_rank: if set to True, this will skip fetching the legend ranks
         :return: a single player or None if no player is found
-        :rtype: ALPlayer
         """
         basic_player_stats: list = self.basic_player_stats(name, platform, skip_tracker_rank)
         assert len(basic_player_stats) == 1
@@ -86,11 +86,11 @@ class ApexLegendsAPI:
 
         NOTE:
             Player must exist, method will return None if the player cannot be found
-        :param uid: UID of the player
-        :param platform: see ALPlatform for all types
-        :param skip_tracker_rank: if set to True, this will skip fetching the legend ranks
+
+        :parameter uid: UID of the player
+        :parameter platform: see ALPlatform for all types
+        :parameter skip_tracker_rank: if set to True, this will skip fetching the legend ranks
         :return: a single player or None if no player is found
-        :rtype: ALPlayer
         """
         basic_player_stats: list = self.basic_player_stats_by_uid(uid, platform, skip_tracker_rank)
         assert len(basic_player_stats) == 1
@@ -119,6 +119,7 @@ class ApexLegendsAPI:
         Query the server for the given player / platform and returns a dictionary of their
         stats.
         More here: https://apexlegendsapi.com/#basic
+
         :param player_name: Player Name to search for
         :param platform: (see Platform enum for values)
         :param skip_tracker_rank: if set to true, this will not fetch the legend's tracker rank
@@ -213,8 +214,7 @@ class ApexLegendsAPI:
 
     def get_player_origin(self, player_name: str, show_all_hits: bool = False) -> list:
         """
-        Query the server for the origin user
-        Returns Origin UID, real username, PID and avatar for a given username
+        Query the server for the origin user and returns Origin UID, real username, PID and avatar for a given username
         :param player_name: Player Name for match history
         :param show_all_hits: True to 'search' for player (show multiple hits), default False
         :return: list of results
