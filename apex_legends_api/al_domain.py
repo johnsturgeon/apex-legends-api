@@ -1,8 +1,8 @@
 """
 Player class for the Apex Legends API Python package
 """
-import arrow
 from typing import List
+import arrow
 from .al_base import ALEventType, ALPlatform  # noqa E0402
 
 

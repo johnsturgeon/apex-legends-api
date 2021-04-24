@@ -214,7 +214,8 @@ class ApexLegendsAPI:
 
     def get_player_origin(self, player_name: str, show_all_hits: bool = False) -> list:
         """
-        Query the server for the origin user and returns Origin UID, real username, PID and avatar for a given username
+        Query the server for the origin user and returns Origin UID, real username, PID and avatar
+         for a given username
         :param player_name: Player Name for match history
         :param show_all_hits: True to 'search' for player (show multiple hits), default False
         :return: list of results
