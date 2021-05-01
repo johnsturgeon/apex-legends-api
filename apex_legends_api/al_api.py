@@ -128,6 +128,17 @@ class ApexLegendsAPI:
                 )
         return ALPlayer(basic_player_stats_data=basic_player_stats[0], events=events)
 
+    def add_player_by_uid(self, player_uid: int, platform: ALPlatform) -> list:
+        """
+        Adds the given player's UUID to the list of tracked players
+
+        :param player_uid: UUID of the player to add
+        :type player_uid: int
+        :param platform: ALPlatform of player to add
+        :type platform: ALPlatform
+        """
+        return self.events_by_uid(str(player_uid), platform=platform, action=ALAction.ADD)
+
     def basic_player_stats(
             self, player_name: str,
             platform: ALPlatform,
