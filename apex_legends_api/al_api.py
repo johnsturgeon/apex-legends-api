@@ -46,7 +46,7 @@ class ApexLegendsAPI:
             response_text = [response_text]
         return response_text
 
-    def nametouid(self, player: str, platform: ALPlatform):
+    def nametouid(self, player: str, platform: ALPlatform) -> int:
         """
         Retrieve a player's uid given they're name and platform
 
@@ -61,7 +61,9 @@ class ApexLegendsAPI:
             'player': player,
             'platform': platform.value
         }
-        return self._make_request(additional_params=additional_params, new_base_url=new_base_url)
+        result = self._make_request(additional_params=additional_params, new_base_url=new_base_url)
+        assert len(result) == 1
+        return result[0]['result']
 
     def get_player(self, name: str, platform: ALPlatform, skip_tracker_rank=False) -> ALPlayer:
         """

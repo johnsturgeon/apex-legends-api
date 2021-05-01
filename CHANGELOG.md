@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2021-05-01
+### Changed
+- Changed the `nametouid` method to return just the int result instead of the list
+
 ## [1.4.2] - 2021-05-01
 ### Added
 - Added new API for adding a player by UID
