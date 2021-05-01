@@ -46,6 +46,23 @@ class ApexLegendsAPI:
             response_text = [response_text]
         return response_text
 
+    def nametouid(self, player: str, platform: ALPlatform):
+        """
+        Retrieve a player's uid given they're name and platform
+
+        :parameter player: Name of the player
+        :type player: str
+        :parameter platform: see [ALPlatform] for all types
+        :type platform: ALPlatform
+        """
+
+        new_base_url: str = "https://api.mozambiquehe.re/nametouid?"
+        additional_params = {
+            'player': player,
+            'platform': platform.value
+        }
+        return self._make_request(additional_params=additional_params, new_base_url=new_base_url)
+
     def get_player(self, name: str, platform: ALPlatform, skip_tracker_rank=False) -> ALPlayer:
         """
         Retrieve the ALPlayer object populated with data from the api.
