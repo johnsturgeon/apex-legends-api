@@ -184,6 +184,16 @@ def test_al_player_badges_exist(
     assert response.global_info.badges[0].name == "Chaos Theory Master"
 
 
+def test_nametouid(mock, nametouid_response):
+    player_name = "Player"
+    platform = ALPlatform.PC
+    url = f"https://api.mozambiquehe.re/nametouid?player={player_name}&platform={platform.value}"
+    mock.register_uri('GET', url, json=nametouid_response)
+    response = api.nametouid(player=player_name, platform=platform)
+    assert len(response) == 1
+    assert response[0]['result'] == 2535473406730526
+
+
 def test_al_player_selected_legend_badge_category(
         mock,
         basic_player_stats_response,

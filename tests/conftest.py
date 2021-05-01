@@ -53,3 +53,8 @@ def match_history_info_response():
 def player_origin_response():
     with open(get_full_filepath('player_origin_response.json')) as json_file:
         yield json.load(json_file)
+
+@pytest.fixture()
+def nametouid_response():
+    with open(get_full_filepath('nametouid_response.json')) as json_file:
+        yield json.load(json_file)
