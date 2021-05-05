@@ -7,7 +7,7 @@ Python wrapper for https://apexlegendsapi.com
 You can install it from source, or pip (recommended)
 
 # Requirements
-`python >= 3.6`
+`python >= 3.9`
 
 ### Source installation
 `python ./setup.py install`

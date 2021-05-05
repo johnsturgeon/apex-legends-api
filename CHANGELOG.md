@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2021-05-04
+### Fixed
+EMERGENCY FIX #2: API is breaking with Season 9 release
+Turns out that having a tracker with no known value breaks.
+That breaks things.
+
+### Changed
+- Bumping the min python version to 3.9
+
 ## [1.5.1] - 2021-05-04
 ### Fixed
 EMERGENCY FIX: API is breaking with Season 9 release
@@ -77,7 +86,7 @@ That breaks things.
 ## [1.1.0]
 ### Added
 - Added docstring comments for every single attribute and class so that they are more easily inspected
-- Added `events` api (to replace `match_history`) - same signature, just different name to better reflect it's usage
+- Added `events` api (to replace `match_history`) - same signature, just different name to better reflect its usage
 
 ### Removed
 - Deprecated `match_history` api (in favor of `events`)
@@ -117,7 +126,7 @@ can now be done through the `ALPlayer` class.  See the README.md for usage.
 - Re-arranged module files and imports
   - `al_base` is where utility / base classes will go that are shared across modules
   - `al_api` is the core API interface class
-  - `al_domain` is the module that will contain all of the 'domain' based
+  - `al_domain` is the module that will contain all the 'domain' based
     classes such as `ALPlayer` (eventually 'matches', etc...)
 - Class renames (which will change the API).  Now all classes are prefixed with `AL` (Apex Legends)
 - Updated README.md to reflect the changes
