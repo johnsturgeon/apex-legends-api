@@ -222,7 +222,7 @@ class DataTracker:
             self.position: int = 0
             """ Position of rank """
             if isinstance(tracker_rank_dict.get('rankPos'), int):
-                self.position= tracker_rank_dict.get('rankPos')
+                self.position = tracker_rank_dict.get('rankPos')
             self.percent: float = 0.0
             """ Percentile of rank (lower number is better) """
             if isinstance(tracker_rank_dict.get('topPercent'), float):
