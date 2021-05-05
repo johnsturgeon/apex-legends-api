@@ -229,13 +229,13 @@ class DataTracker:
                 self.percent: float = float(tracker_rank_dict.get('topPercent'))
 
     def __init__(self, data_trackers_dict: dict):
-        self.name: str = data_trackers_dict.get('name')
+        self.name: str = str(data_trackers_dict.get('name'))
         """ Descriptive name of the tracker """
         self.value: int = data_trackers_dict.get('value')
         """ Numerical value of the tracker """
-        self.key: str = data_trackers_dict.get('key')
+        self.key: str = str(data_trackers_dict.get('key'))
         """ Unique 'key' for the tracker """
-        self.category: str = self.key.lstrip('specialEvent_')
+        self.category: str = self.key.removeprefix('specialEvent_')
         """
         Aggregate key for combining 'specialEvent' and 'season' data with regular data
 
