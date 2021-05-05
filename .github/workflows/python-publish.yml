@@ -11,8 +11,9 @@ jobs:
   deploy:
 
     runs-on: ubuntu-latest
-    environment: PyPi
-    url: https://pypi.org/project/apex-legends-api/
+    environment:
+      name: PyPi
+      url: https://pypi.org/project/apex-legends-api/
 
     steps:
     - uses: actions/checkout@v2
