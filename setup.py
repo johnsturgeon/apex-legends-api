@@ -9,9 +9,9 @@ with open('requirements.txt') as f:
 
 setup(
     name='apex-legends-api',
-    version='1.5.2',
+    version='2.0.0',
     packages=['apex_legends_api'],
-    python_requires='>=3.6.*',
+    python_requires='>=3.9.*',
     url='https://github.com/johnsturgeon/apex-legends-api',
     license='MIT',
     author='John Sturgeon',
