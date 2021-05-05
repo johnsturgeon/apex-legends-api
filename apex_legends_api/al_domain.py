@@ -219,10 +219,14 @@ class DataTracker:
     class TrackerRank:
         """ Data structure for the rank for the stat being tracked """
         def __init__(self, tracker_rank_dict: dict):
-            self.position: int = tracker_rank_dict.get('rankPos')
+            self.position: int = 0
             """ Position of rank """
-            self.percent: float = float(tracker_rank_dict.get('topPercent'))
+            if isinstance(tracker_rank_dict.get('rankPos'), int):
+                self.position= tracker_rank_dict.get('rankPos')
+            self.percent: float = 0.0
             """ Percentile of rank (lower number is better) """
+            if isinstance(tracker_rank_dict.get('topPercent'), float):
+                self.percent: float = float(tracker_rank_dict.get('topPercent'))
 
     def __init__(self, data_trackers_dict: dict):
         self.name: str = data_trackers_dict.get('name')

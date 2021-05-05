@@ -9,7 +9,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='apex-legends-api',
-    version='1.5.0',
+    version='1.5.1',
     packages=['apex_legends_api'],
     python_requires='>=3.6.*',
     url='https://github.com/johnsturgeon/apex-legends-api',
