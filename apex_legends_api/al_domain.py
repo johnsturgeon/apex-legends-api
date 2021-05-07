@@ -244,9 +244,10 @@ class DataTracker:
             statistical purposes it makes sense to just drop the 'specialEvent' prefix
             or any 'season' suffix
         """
-        if self.category.startswith('wins_'):
+        self.category = self.category.removeprefix('arenas_')
+        if self.category.startswith('wins_') or self.category.endswith('_wins'):
             self.category = 'wins'
-        if self.category.startswith('kills_'):
+        if self.category.startswith('kills_') or self.category.endswith('_kills'):
             self.category = 'kills'
         rank_dict: dict = data_trackers_dict.get('rank')
         if not rank_dict:
