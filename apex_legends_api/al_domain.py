@@ -245,6 +245,7 @@ class DataTracker:
             or any 'season' suffix
         """
         self.category = self.category.removeprefix('arenas_')
+        self.category = self.category.removeprefix('grandsoiree_')
         if self.category.startswith('wins_') or self.category.endswith('_wins'):
             self.category = 'wins'
         if self.category.startswith('kills_') or self.category.endswith('_kills'):
